@@ -229,6 +229,175 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/03/zookeeper安装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/03/zookeeper安装/" itemprop="url">zookeeper安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-03T22:29:37+08:00">
+                2019-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/zookeeper/" itemprop="url" rel="index">
+                    <span itemprop="name">zookeeper</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>奇数个节点</p>
+</blockquote>
+<h2 id="1-上传安装包并解压"><a href="#1-上传安装包并解压" class="headerlink" title="1.上传安装包并解压"></a>1.上传安装包并解压</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop1 ~]$ tar -zxvf zookeeper-3.4.10.tar.gz </span><br><span class="line">[hadoop@hadoop1 ~]$ mv zookeeper-3.4.10 zookeeper</span><br></pre></td></tr></table></figure>
+<h2 id="2-修改配置文件"><a href="#2-修改配置文件" class="headerlink" title="2.修改配置文件"></a>2.修改配置文件</h2><h3 id="1-修改zoo-cfg"><a href="#1-修改zoo-cfg" class="headerlink" title="1.修改zoo.cfg"></a>1.修改zoo.cfg</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop1 ~]$ <span class="built_in">cd</span> zookeeper/conf</span><br><span class="line">[hadoop@hadoop1 conf]$ ls</span><br><span class="line">configuration.xsl  log4j.properties  zoo_sample.cfg</span><br><span class="line">[hadoop@hadoop1 conf]$ cp zoo_sample.cfg zoo.cfg</span><br><span class="line">[hadoop@hadoop1 conf]$ vim zoo.cfg</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The number of milliseconds of each tick</span></span><br><span class="line">tickTime=2000</span><br><span class="line"><span class="comment"># The number of ticks that the initial </span></span><br><span class="line"><span class="comment"># synchronization phase can take</span></span><br><span class="line">initLimit=10</span><br><span class="line"><span class="comment"># The number of ticks that can pass between </span></span><br><span class="line"><span class="comment"># sending a request and getting an acknowledgement</span></span><br><span class="line">syncLimit=5</span><br><span class="line"><span class="comment"># the directory where the snapshot is stored.</span></span><br><span class="line"><span class="comment"># do not use /tmp for storage, /tmp here is just </span></span><br><span class="line"><span class="comment"># example sakes.</span></span><br><span class="line">dataDir=/home/hadoop/data/zookeeper</span><br><span class="line"><span class="comment"># the port at which the clients will connect</span></span><br><span class="line">clientPort=2181</span><br><span class="line"><span class="comment"># the maximum number of client connections.</span></span><br><span class="line"><span class="comment"># increase this if you need to handle more clients</span></span><br><span class="line"><span class="comment">#maxClientCnxns=60</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Be sure to read the maintenance section of the </span></span><br><span class="line"><span class="comment"># administrator guide before turning on autopurge.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># The number of snapshots to retain in dataDir</span></span><br><span class="line"><span class="comment">#autopurge.snapRetainCount=3</span></span><br><span class="line"><span class="comment"># Purge task interval in hours</span></span><br><span class="line"><span class="comment"># Set to "0" to disable auto purge feature</span></span><br><span class="line"><span class="comment">#autopurge.purgeInterval=1</span></span><br><span class="line">server.1=hadoop1:2888:3888</span><br><span class="line">server.2=hadoop2:2888:3888</span><br><span class="line">server.3=hadoop3:2888:3888</span><br></pre></td></tr></table></figure>
+<p>只需修改快照路径</p>
+<blockquote>
+<p>dataDir=/home/hadoop/data/zookeeper</p>
+</blockquote>
+<p>添加集群信息</p>
+<blockquote>
+<p>server.1=hadoop1:2888:3888</p>
+<p>server.2=hadoop2:2888:3888</p>
+<p>server.3=hadoop3:2888:3888</p>
+</blockquote>
+<p><code>说明</code></p>
+<blockquote>
+<ol>
+<li>server.id必须和dataDir目录下的myid内容一致，且id范围在1——255之间</li>
+<li>2888表示通信端口，3888表示选主端口</li>
+</ol>
+</blockquote>
+<h3 id="2-添加每个节点的id"><a href="#2-添加每个节点的id" class="headerlink" title="2.添加每个节点的id"></a>2.添加每个节点的id</h3><p>在<code>/home/hadoop/data/zookeeper</code>下创建myid文件，并写入对应id</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop1 data]$ mkdir zookeeper</span><br><span class="line">[hadoop@hadoop1 data]$ vi myid</span><br></pre></td></tr></table></figure>
+<h3 id="3-修改环境变量"><a href="#3-修改环境变量" class="headerlink" title="3.修改环境变量"></a>3.修改环境变量</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###切换到root</span></span><br><span class="line">[root@hadoop1 ~]<span class="comment"># vim /etc/profile</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Java</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/jdk8</span><br><span class="line"><span class="built_in">export</span> HADOOP_HOME=/home/hadoop/hadoop</span><br><span class="line"><span class="built_in">export</span> HIVE_HOME=/home/hadoop/hive</span><br><span class="line"><span class="built_in">export</span> ZOOKEEPER_HOME=/home/hadoop/zookeeper</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$HADOOP_HOME</span>/bin:<span class="variable">$HADOOP_HOME</span>/sbin:<span class="variable">$HIVE_HOME</span>/bin:<span class="variable">$ZOOKEEPER_HOME</span>/bin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@hadoop1 ~]<span class="comment"># source /etc/profile</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-启动"><a href="#3-启动" class="headerlink" title="3.启动"></a>3.启动</h2><p>每个节点都要单独启动</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop1 ~]$ <span class="built_in">cd</span> zookeeper/bin/</span><br><span class="line">[hadoop@hadoop1 bin]$ zkServer.sh start</span><br><span class="line">[hadoop@hadoop1 bin]$ jps</span><br><span class="line">3717 Jps</span><br><span class="line">5285 DataNode</span><br><span class="line">5142 NameNode</span><br><span class="line">3688 QuorumPeerMain</span><br><span class="line">5994 NodeManager</span><br><span class="line"></span><br><span class="line"><span class="comment">###检查状态</span></span><br><span class="line">[hadoop@hadoop1 bin]$ zkServer.sh status</span><br><span class="line">ZooKeeper JMX enabled by default</span><br><span class="line">Using config: /home/hadoop/zookeeper/bin/../conf/zoo.cfg</span><br><span class="line">Mode: follower</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop2 bin]$ zkServer.sh status</span><br><span class="line">ZooKeeper JMX enabled by default</span><br><span class="line">Using config: /home/hadoop/zookeeper/bin/../conf/zoo.cfg</span><br><span class="line">Mode: followe</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop3 bin]$ zkServer.sh status</span><br><span class="line">ZooKeeper JMX enabled by default</span><br><span class="line">Using config: /home/hadoop/zookeeper/bin/../conf/zoo.cfg</span><br><span class="line">Mode: leader</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/03/mysql5.6安装/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1170,7 +1339,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1181,7 +1350,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 
               </div>
@@ -1192,7 +1361,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
