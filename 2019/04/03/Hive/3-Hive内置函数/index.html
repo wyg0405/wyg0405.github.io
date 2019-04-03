@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Hive内置函数分类 自定义函数(UDF)，一对一 自定义聚合函数(UDAF)，多对一 自定义表函数(UDTF)，一对多  查看内置函数,271个 1show functions; 查看函数描述 1desc function sum; 查看函数详细信息 1desc function extended sum; 数学函数下面表格中的函数为Hive的内置数学函数，大部分当参数为NULL时返回NULL。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2019/04/03/Hive/3-Hive内置函数/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Hive内置函数分类 自定义函数(UDF)，一对一 自定义聚合函数(UDAF)，多对一 自定义表函数(UDTF)，一对多  查看内置函数,271个 1show functions; 查看函数描述 1desc function sum; 查看函数详细信息 1desc function extended sum; 数学函数下面表格中的函数为Hive的内置数学函数，大部分当参数为NULL时返回NULL。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-25T12:35:20.328Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="Hive内置函数分类 自定义函数(UDF)，一对一 自定义聚合函数(UDAF)，多对一 自定义表函数(UDTF)，一对多  查看内置函数,271个 1show functions; 查看函数描述 1desc function sum; 查看函数详细信息 1desc function extended sum; 数学函数下面表格中的函数为Hive的内置数学函数，大部分当参数为NULL时返回NULL。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/03/Hive/3-Hive内置函数/">
+
+
+
+
+
+  <title> | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/03/Hive/3-Hive内置函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-03T15:15:00+08:00">
+                2019-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Hive内置函数"><a href="#Hive内置函数" class="headerlink" title="Hive内置函数"></a>Hive内置函数</h1><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
+<li>自定义函数(UDF)，一对一</li>
+<li>自定义聚合函数(UDAF)，多对一</li>
+<li>自定义表函数(UDTF)，一对多</li>
+</ul>
+<p>查看内置函数,271个</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> functions;</span><br></pre></td></tr></table></figure>
+<p>查看函数描述</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc function sum;</span><br></pre></td></tr></table></figure>
+<p>查看函数详细信息</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc function extended sum;</span><br></pre></td></tr></table></figure>
+<h2 id="数学函数"><a href="#数学函数" class="headerlink" title="数学函数"></a>数学函数</h2><p>下面表格中的函数为Hive的内置数学函数，大部分当参数为NULL时返回NULL。</p>
+<table>
+<thead>
+<tr>
+<th><strong>返回类型</strong></th>
+<th><strong>函数名</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bigint</code></td>
+<td>round(double a)</td>
+<td>返回a经过四舍五入的<code>BIGINT</code> 值</td>
+</tr>
+<tr>
+<td>double</td>
+<td>round(double a, int d)</td>
+<td>返回a经过四舍五入，保留d位小数的DOUBLE 值</td>
+</tr>
+<tr>
+<td>bigint</td>
+<td>floor(double a)</td>
+<td>返回小于等于a的最大BIGINT 值</td>
+</tr>
+<tr>
+<td>bigint</td>
+<td>ceil(double a), ceiling(double a)</td>
+<td>返回大于等于a的最小BIGINT 值</td>
+</tr>
+<tr>
+<td>double</td>
+<td>rand(),rand(int seed)</td>
+<td>返回一个均匀分布在0到1之间的随机数，指定seed将会确保产生的随机数序列是确定的</td>
+</tr>
+<tr>
+<td>double</td>
+<td>exp(double a), exp(decimal a)</td>
+<td>返回ea</td>
+</tr>
+<tr>
+<td>double</td>
+<td>ln(double a), ln(decimal a)</td>
+<td>返回a的自然对数值</td>
+</tr>
+<tr>
+<td>double</td>
+<td>log10(double a), log10(decimal a)</td>
+<td>返回a的以10为底的对数值</td>
+</tr>
+<tr>
+<td>double</td>
+<td>log2(double a), log2(decimal a)</td>
+<td>返回a的以2为底的对数值</td>
+</tr>
+<tr>
+<td>double</td>
+<td>log(double base, double a)</td>
+<td>返回a以base为底的对数值，除了DOUBLE 类型，还可以是DECIMAL 类型，并且两种类型可以混合使用</td>
+</tr>
+<tr>
+<td>double</td>
+<td>pow(double a, double p), power(double a, double p)</td>
+<td>返回ap</td>
+</tr>
+<tr>
+<td>double</td>
+<td>sqrt(double a), sqrt(decimal a)</td>
+<td>返回a的平方根</td>
+</tr>
+<tr>
+<td>string</td>
+<td>bin(bigint a)</td>
+<td>返回a的二进制格式</td>
+</tr>
+<tr>
+<td>string</td>
+<td>hex(bigint a)hex(string a)hex(binary a)</td>
+<td>如果参数为整数或者二进制，返回十六进制的字符串，如果参数为字符串，该函数将每个字符转换为十六进制表示，并返回结果字符串</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>unhex(string a)</td>
+<td>将每对字符解释为十六进制并转换为该十六进制的字节表示</td>
+</tr>
+<tr>
+<td>string</td>
+<td>conv(bigint num, int from_base, int to_base),conv(string num, int from_base, int to_base)</td>
+<td>将数值从一种进制表示转换为另一种进制，比如从二进制转换为十进制</td>
+</tr>
+<tr>
+<td>double</td>
+<td>abs(double a)</td>
+<td>返回a的绝对值</td>
+</tr>
+<tr>
+<td>int or double</td>
+<td>pmod(int a, int b), pmod(double a, double b)</td>
+<td>返回a mod b的正数值</td>
+</tr>
+<tr>
+<td>double</td>
+<td>sin(double a),sin(decimal a)</td>
+<td>返回a的正弦值，a为弧度值</td>
+</tr>
+<tr>
+<td>double</td>
+<td>asin(double a), asin(decimal a)</td>
+<td>如果1&lt;=a&lt;=-1，返回a的反正弦值，否则返回NULL</td>
+</tr>
+<tr>
+<td>double</td>
+<td>cos(double a), cos(decimal a)</td>
+<td>返回a的余弦值，a为弧度值</td>
+</tr>
+<tr>
+<td>double</td>
+<td>acos(double a), acos(decimal a)</td>
+<td>如果-1&lt;=a&lt;=1，返回a的反余弦值，否则返回NULL</td>
+</tr>
+<tr>
+<td>double</td>
+<td>tan(double a),tan(decimal a)</td>
+<td>返回a的正切值，a为弧度值</td>
+</tr>
+<tr>
+<td>double</td>
+<td>atan(double a), atan(decimal a)</td>
+<td>返回a的反正切值</td>
+</tr>
+<tr>
+<td>double</td>
+<td>degrees(double a), degrees(decimal a)</td>
+<td>将a从弧度值转换为对应的角度值</td>
+</tr>
+<tr>
+<td>double</td>
+<td>radians(double a), radians(double a)</td>
+<td>将a从角度值转换为弧度值</td>
+</tr>
+<tr>
+<td>int or double</td>
+<td>positive(int a), positive(double a)</td>
+<td>返回a</td>
+</tr>
+<tr>
+<td>int or double</td>
+<td>negative(int a), negative(double a)</td>
+<td>返回-a</td>
+</tr>
+<tr>
+<td>double or int</td>
+<td>sign(double a), sign(decimal a)</td>
+<td>如果a为正数返回1.0，若为负数返回-1.0，否则返回0.0。参数为DECIMAL 时返回值为INT类型</td>
+</tr>
+<tr>
+<td>double</td>
+<td>e()</td>
+<td>返回e的值</td>
+</tr>
+<tr>
+<td>double</td>
+<td>pi()</td>
+<td>返回π的值</td>
+</tr>
+</tbody>
+</table>
+<h2 id="集合函数"><a href="#集合函数" class="headerlink" title="集合函数"></a>集合函数</h2><p>下表为Hive中的集合函数。</p>
+<table>
+<thead>
+<tr>
+<th><strong>返回类型</strong></th>
+<th><strong>函数名</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td>size(Map&lt;K.V&gt;)</td>
+<td>返回map中的元素数量</td>
+</tr>
+<tr>
+<td>int</td>
+<td>size(Array<t>)</t></td>
+<td>返回数组中的元素数量</td>
+</tr>
+<tr>
+<td>array<k></k></td>
+<td>map_keys(Map&lt;K.V&gt;)</td>
+<td>返回未经排序的包含map中keys的数组</td>
+</tr>
+<tr>
+<td>array<v></v></td>
+<td>map_values(Map&lt;K.V&gt;)</td>
+<td>返回未经排序的包含map中values的数组</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>array_contains(Array<t>, value)</t></td>
+<td>如果数组包含value，返回true</td>
+</tr>
+<tr>
+<td>array<t></t></td>
+<td>sort_array(Array<t>)</t></td>
+<td>将数组按照升序排序并返回</td>
+</tr>
+</tbody>
+</table>
+<h2 id="类型转换函数"><a href="#类型转换函数" class="headerlink" title="类型转换函数"></a>类型转换函数</h2><p>下表为Hive中的类型转换函数。</p>
+<table>
+<thead>
+<tr>
+<th><strong>返回类型</strong></th>
+<th><strong>函数名</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>binary</td>
+<td>binary(string\</td>
+<td>binary)</td>
+<td>将输入参数转换为binary</td>
+</tr>
+<tr>
+<td><type></type></td>
+<td>cast(expr as <type>)</type></td>
+<td>将表达式的结果expr转换为<type>，如果转换不成功则返回NULL，例如cast(‘2014-08-09’ as date)</type></td>
+</tr>
+</tbody>
+</table>
+<h2 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h2><p>下表中为Hive中的内置日期函数。</p>
+<table>
+<thead>
+<tr>
+<th><strong>返回类型</strong></th>
+<th><strong>函数名</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>string</td>
+<td>from_unixtime(bigint unixtime[, string format])</td>
+<td>将从unix时间（1970-01-01 00：00：00 UTC）开始的秒数转换为表示当前系统时区的时间戳，格式为“1970-01-01 00：00：00”</td>
+</tr>
+<tr>
+<td>bigint</td>
+<td>unix_timestamp()</td>
+<td>返回当前Unix时间戳表示的秒数</td>
+</tr>
+<tr>
+<td>bigint</td>
+<td>unix_timestamp(string date)</td>
+<td>将格式为yyyy-MM-dd HH：mm：ss的字符串转换为Unix时间戳（秒），使用默认的时区和区域，如果失败返回0</td>
+</tr>
+<tr>
+<td>bigint</td>
+<td>unix_timestamp(string date, string pattern)</td>
+<td>根据指定模式将时间字符串转换为Unix时间戳（秒），失败返回0</td>
+</tr>
+<tr>
+<td>string</td>
+<td>to_date(string timestamp)</td>
+<td>返回时间戳字符串的日期部分，如：to_date(“1970-01-01 00:00:00”) = “1970-01-01”</td>
+</tr>
+<tr>
+<td>int</td>
+<td>year(string date)</td>
+<td>返回日期或时间戳字符串的年部分，如： year(“1970-01-01 00:00:00”) = 1970, year(“1970-01-01”) = 1970</td>
+</tr>
+<tr>
+<td>int</td>
+<td>month(string date)</td>
+<td>返回日期或时间戳字符串的月部分，如： month(“1970-11-01 00:00:00”) = 11, month(“1970-11-01”) = 11</td>
+</tr>
+<tr>
+<td>int</td>
+<td>day(string date) dayofmonth(date)</td>
+<td>返回日期或时间戳字符串的天部分，如：day(“1970-11-01 00:00:00”) = 1, day(“1970-11-01”) = 1</td>
+</tr>
+<tr>
+<td>int</td>
+<td>hour(string date)</td>
+<td>返回时间戳的小时部分： hour(‘2009-07-30 12:58:59’) = 12, hour(‘12:58:59’) = 12</td>
+</tr>
+<tr>
+<td>int</td>
+<td>minute(string date)</td>
+<td>返回时间戳的分钟</td>
+</tr>
+<tr>
+<td>int</td>
+<td>second(string date)</td>
+<td>返回时间戳的秒</td>
+</tr>
+<tr>
+<td>int</td>
+<td>weekofyear(string date)</td>
+<td>返回时间戳的星期数，如： weekofyear(“1970-11-01 00:00:00”) = 44, weekofyear(“1970-11-01”) = 44</td>
+</tr>
+<tr>
+<td>int</td>
+<td>datediff(string enddate, string startdate)</td>
+<td>返回从startdate到enddate的天数，如： datediff(‘2009-03-01’, ‘2009-02-27’) = 2</td>
+</tr>
+<tr>
+<td>string</td>
+<td>date_add(string startdate, int days)</td>
+<td>向startdate增加指定的天数，如： date_add(‘2008-12-31’, 1) = ‘2009-01-01’</td>
+</tr>
+<tr>
+<td>string</td>
+<td>date_sub(string startdate, int days)</td>
+<td>从startdate减去指定的天数，如： date_sub(‘2008-12-31’, 1) = ‘2008-12-30’</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>from_utc_timestamp(timestamp, string timezone)</td>
+<td>假设给定时间戳为UTC时间，并将其转换为给定时区的时间戳</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>to_utc_timestamp(timestamp, string timezone)</td>
+<td>假设给定时间戳为给定时区的时间，将其转换为UTC时间戳</td>
+</tr>
+</tbody>
+</table>
+<h2 id="条件函数"><a href="#条件函数" class="headerlink" title="条件函数"></a>条件函数</h2><p>下表为Hive支持的一些条件函数。</p>
+<table>
+<thead>
+<tr>
+<th><strong>返回类型</strong></th>
+<th><strong>函数名</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T</td>
+<td>if(boolean testCondition, T valueTrue, T valueFalseOrNull)</td>
+<td>如果testCondition为真，返回valueTrue，否则返回valueFalseOrNull</td>
+</tr>
+<tr>
+<td>T</td>
+<td>COALESCE(T v1, T v2, …)</td>
+<td>返回第一个不是NULL的v，若全部为NULL，返回NULL</td>
+</tr>
+<tr>
+<td>T</td>
+<td>CASE a WHEN b THEN c [WHEN d THEN e]* [ELSE f] END</td>
+<td>当a=b返回c，当a=d返回e，其它返回f</td>
+</tr>
+<tr>
+<td>T</td>
+<td>CASE WHEN a THEN b [WHEN c THEN d]* [ELSE e] END</td>
+<td>当a=true返回b，当c=true返回d，其它返回e</td>
+</tr>
+</tbody>
+</table>
+<h2 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h2><p>下表为Hive内置的字符串函数。</p>
+<table>
+<thead>
+<tr>
+<th><strong>返回类型</strong></th>
+<th><strong>函数名</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td>ascii(string str)</td>
+<td>返回str第一个字符串的数值</td>
+</tr>
+<tr>
+<td>string</td>
+<td>base64(binary bin)</td>
+<td>将二进制参数转换为base64字符串</td>
+</tr>
+<tr>
+<td>string</td>
+<td>concat(string\</td>
+<td>binary A, string\</td>
+<td>binary B…)</td>
+<td>返回将A和B按顺序连接在一起的字符串，如：concat(‘foo’, ‘bar’) 返回’foobar’</td>
+</tr>
+<tr>
+<td>array&lt;struct&lt;string,double&gt;&gt;</td>
+<td>context_ngrams(array&lt;array<string>&gt;, array<string>, int K, int pf)</string></string></td>
+<td>从一组标记化的句子中返回前k个文本</td>
+</tr>
+<tr>
+<td>string</td>
+<td>concat_ws(string SEP, string A, string B…)</td>
+<td>类似concat() ，但使用自定义的分隔符SEP</td>
+</tr>
+<tr>
+<td>string</td>
+<td>concat_ws(string SEP, array<string>)</string></td>
+<td>类似concat_ws() ，但参数为字符串数组</td>
+</tr>
+<tr>
+<td>string</td>
+<td>decode(binary bin, string charset)</td>
+<td>使用指定的字符集将第一个参数解码为字符串，如果任何一个参数为null，返回null。可选字符集为： ‘US_ASCII’, ‘ISO-8859-1’, ‘UTF-8’, ‘UTF-16BE’, ‘UTF-16LE’, ‘UTF-16’</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>encode(string src, string charset)</td>
+<td>使用指定的字符集将第一个参数编码为binary ，如果任一参数为null，返回null</td>
+</tr>
+<tr>
+<td>int</td>
+<td>find_in_set(string str, string strList)</td>
+<td>返回str在strList中第一次出现的位置，strList为用逗号分隔的字符串，如果str包含逗号则返回0，若任何参数为null，返回null。如： find_in_set(‘ab’, ‘abc,b,ab,c,def’) 返回3</td>
+</tr>
+<tr>
+<td>string</td>
+<td>format_number(number x, int d)</td>
+<td>将数字x格式化为’#,###,###.##’，四舍五入为d位小数位，将结果做为字符串返回。如果d=0，结果不包含小数点或小数部分</td>
+</tr>
+<tr>
+<td>string</td>
+<td>get_json_object(string json_string, string path)</td>
+<td>从基于json path的json字符串中提取json对象，返回json对象的json字符串，如果输入的json字符串无效返回null。Json 路径只能有数字、字母和下划线，不允许大写和其它特殊字符</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>in_file(string str, string filename)</td>
+<td>如果str在filename中以正行的方式出现，返回true</td>
+</tr>
+<tr>
+<td>int</td>
+<td>instr(string str, string substr)</td>
+<td>返回substr在str中第一次出现的位置。若任何参数为null返回null，若substr不在str中返回0。Str中第一个字符的位置为1</td>
+</tr>
+<tr>
+<td>int</td>
+<td>length(string A)</td>
+<td>返回A的长度</td>
+</tr>
+<tr>
+<td>int</td>
+<td>locate(string substr, string str[, int pos])</td>
+<td>返回substr在str的位置pos后第一次出现的位置</td>
+</tr>
+<tr>
+<td>string</td>
+<td>lower(string A) lcase(string A)</td>
+<td>返回字符串的小写形式</td>
+</tr>
+<tr>
+<td>string</td>
+<td>lpad(string str, int len, string pad)</td>
+<td>将str左侧用字符串pad填充，长度为len</td>
+</tr>
+<tr>
+<td>string</td>
+<td>ltrim(string A)</td>
+<td>去掉字符串A左侧的空格，如：ltrim(‘ foobar ‘)的结果为’foobar ‘</td>
+</tr>
+<tr>
+<td>array&lt;struct&lt;string,double&gt;&gt;</td>
+<td>ngrams(array&lt;array<string>&gt;, int N, int K, int pf)</string></td>
+<td>从一组标记化的Returns the top-k 句子中返回前K个N-grams</td>
+</tr>
+<tr>
+<td>string</td>
+<td>parse_url(string urlString, string partToExtract [, string keyToExtract])</td>
+<td>返回给定URL的指定部分，partToExtract的有效值包括HOST，PATH， QUERY， REF， PROTOCOL， AUTHORITY，FILE和USERINFO。例如：  parse_url(‘<a href="http://facebook.com/path1/p.php?k1=v1&amp;k2=v2#Ref1&#39;" target="_blank" rel="noopener">http://facebook.com/path1/p.php?k1=v1&amp;k2=v2#Ref1&#39;</a>, ‘HOST’) 返回 ‘facebook.com’.。当第二个参数为QUERY时，可以使用第三个参数提取特定参数的值，例如： parse_url(‘<a href="http://facebook.com/path1/p.php?k1=v1&amp;k2=v2#Ref1&#39;" target="_blank" rel="noopener">http://facebook.com/path1/p.php?k1=v1&amp;k2=v2#Ref1&#39;</a>, ‘QUERY’, ‘k1’) 返回’v1’</td>
+</tr>
+<tr>
+<td>string</td>
+<td>printf(String format, Obj… args)</td>
+<td>将输入参数进行格式化输出</td>
+</tr>
+<tr>
+<td>string</td>
+<td>regexp_extract(string subject, string pattern, int index)</td>
+<td>使用pattern从给定字符串中提取字符串。如： regexp_extract(‘foothebar’, ‘foo(.*?)(bar)’, 2) 返回’bar’ 有时需要使用预定义的字符类：使用’\s’ 做为第二个参数将匹配s，’s’匹配空格等。参数index是Java正则匹配器方法group()方法中的索引</td>
+</tr>
+<tr>
+<td>string</td>
+<td>regexp_replace(string INITIAL_STRING, string PATTERN, string REPLACEMENT)</td>
+<td>使用REPLACEMENT替换字符串INITIAL_STRING中匹配PATTERN的子串，例如： regexp_replace(“foobar”, “oo\</td>
+<td>ar”, “”) 返回’fb’</td>
+</tr>
+<tr>
+<td>string</td>
+<td>repeat(string str, int n)</td>
+<td>将str重复n次</td>
+</tr>
+<tr>
+<td>string</td>
+<td>reverse(string A)</td>
+<td>将字符串A翻转</td>
+</tr>
+<tr>
+<td>string</td>
+<td>rpad(string str, int len, string pad)</td>
+<td>在str的右侧使用pad填充至长度len</td>
+</tr>
+<tr>
+<td>string</td>
+<td>rtrim(string A)</td>
+<td>去掉字符串A右侧的空格，如： rtrim(‘ foobar ‘) 返回 ‘ foobar’</td>
+</tr>
+<tr>
+<td>array&lt;array<string>&gt;</string></td>
+<td>sentences(string str, string lang, string locale)</td>
+<td>将自然语言文本处理为单词和句子，每个句子在适当的边界分割，返回单词的数组。参数lang和local<a href="https://www.baidu.com/s?wd=%E4%B8%BA%E5%8F%AF&amp;tn=24004469_oem_dg&amp;rsv_dl=gh_pl_sl_csd" target="_blank" rel="noopener">为可</a>选参数，例如： sentences(‘Hello there! How are you?’) 返回( (“Hello”, “there”), (“How”, “are”, “you”) )</td>
+</tr>
+<tr>
+<td>string</td>
+<td>space(int n)</td>
+<td>返回n个空格的字符串</td>
+</tr>
+<tr>
+<td>array</td>
+<td>split(string str, string pat)</td>
+<td>用pat分割字符串str，pat为正则表达式</td>
+</tr>
+<tr>
+<td>map&lt;string,string&gt;</td>
+<td>str_to_map(text[, delimiter1, delimiter2])</td>
+<td>使用两个分隔符将文本分割为键值对。第一个分隔符将文本分割为K-V 对，第二个分隔符分隔每个K-V 对。默认第一个分隔符为“<strong>，</strong>“，第二个分隔符为=</td>
+</tr>
+<tr>
+<td>string</td>
+<td>substr(string\</td>
+<td>binary A, int start) substring(string\</td>
+<td>binary A, int start)</td>
+<td>返回A从位置start直到结尾的子串</td>
+</tr>
+<tr>
+<td>string</td>
+<td>substr(string\</td>
+<td>binary A, int start, int len) substring(string\</td>
+<td>binary A, int start, int len)</td>
+<td>返回A中从位置start开始，长度为len的子串，如： substr(‘foobar’, 4, 1) 返回 ‘b’</td>
+</tr>
+<tr>
+<td>string</td>
+<td>translate(string input, string from, string to)</td>
+<td>将input中出现在from中的字符替换为to中的字符串，如果任何参数为null，结果为null</td>
+</tr>
+<tr>
+<td>string</td>
+<td>trim(string A)</td>
+<td>去掉字符串A两端的空格</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>unbase64(string str)</td>
+<td>将base64字符串转换为二进制</td>
+</tr>
+<tr>
+<td>string</td>
+<td>upper(string A) ucase(string A)</td>
+<td>返回字符串A的大写形式</td>
+</tr>
+</tbody>
+</table>
+<h2 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h2><p>下表为Hive内置的聚合函数。</p>
+<table>
+<thead>
+<tr>
+<th><strong>返回类型</strong></th>
+<th><strong>函数名</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BIGINT</td>
+<td>count(*)count(expr)count(DISTINCT expr[, expr_.])</td>
+<td>count(*) – 返回检索到的行的总数，包括含有NULL值的行。count(expr) – 返回expr表达式不是NULL的行的数量count(DISTINCT expr[, expr]) – 返回expr是唯一的且非NULL的行的数量</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>sum(col)sum(DISTINCT col)</td>
+<td>对组内某列求和（包含重复值）或者对组内某列求和（不包含重复值）</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>avg(col),avg(DISTINCT col)</td>
+<td>对组内某列元素求平均值者（包含重复值或不包含重复值）</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>min(col)</td>
+<td>返回组内某列的最小值</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>max(col)</td>
+<td>返回组内某列的最大值</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>variance(col),var_pop(col)</td>
+<td>返回组内某个数字列的方差</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>var_samp(col)</td>
+<td>返回组内某个数字列的无偏样本方差</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>stddev_pop(col)</td>
+<td>返回组内某个数字列的标准差</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>stddev_samp(col)</td>
+<td>返回组内某个数字列的无偏样本标准差</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>covar_pop(col1, col2)</td>
+<td>返回组内两个数字列的总体协方差</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>covar_samp(col1, col2)</td>
+<td>返回组内两个数字列的样本协方差</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>corr(col1, col2)</td>
+<td>返回组内两个数字列的皮尔逊相关系数</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>percentile(BIGINT col, p)</td>
+<td>返回组内某个列精确的第p位百分数，p必须在0和1之间</td>
+</tr>
+<tr>
+<td>array<double></double></td>
+<td>percentile(BIGINT col, array(p1 [, p2]…))</td>
+<td>返回组内某个列精确的第p1，p2，……位百分数，p必须在0和1之间</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>percentile_approx(DOUBLE col, p [, B])</td>
+<td>返回组内数字列近似的第p位百分数（包括浮点数），参数B控制近似的精确度，B值越大，近似度越高，默认值为<a href="https://www.baidu.com/s?wd=10000&amp;tn=24004469_oem_dg&amp;rsv_dl=gh_pl_sl_csd" target="_blank" rel="noopener">10000</a>。当列<a href="https://www.baidu.com/s?wd=%E4%B8%AD%E9%9D%9E&amp;tn=24004469_oem_dg&amp;rsv_dl=gh_pl_sl_csd" target="_blank" rel="noopener">中非</a>重复值的数量小于B时，返回精确的百分数</td>
+</tr>
+<tr>
+<td>array<double></double></td>
+<td>percentile_approx(DOUBLE col, array(p1 [, p2]…) [, B])</td>
+<td>同上，但接受并返回百分数数组</td>
+</tr>
+<tr>
+<td>array&lt;struct {‘x’,’y’}&gt;</td>
+<td>histogram_numeric(col, b)</td>
+<td>使用b个非均匀间隔的箱子计算组内数字列的柱状图（直方图），输出的数组大小为b，double类型的(x,y)表示直方图的中心和高度</td>
+</tr>
+<tr>
+<td>array</td>
+<td>collect_set(col)</td>
+<td>返回消除了重复元素的数组</td>
+</tr>
+<tr>
+<td>array</td>
+<td>collect_list(col)</td>
+<td>返回允许重复元素的数组</td>
+</tr>
+<tr>
+<td>INTEGER</td>
+<td>ntile(INTEGER x)</td>
+<td>该函数将已经排序的分区分到x个桶中，并为每行分配一个桶号。这可以容易的计算三分位，四分位，十分位，百分位和其它通用的概要统计</td>
+</tr>
+</tbody>
+</table>
+<h2 id="内置-Table-Generating函数（UDTF）"><a href="#内置-Table-Generating函数（UDTF）" class="headerlink" title="内置 Table-Generating函数（UDTF）"></a>内置 Table-Generating函数（UDTF）</h2><p>正常的用户定义函数，如concat，输入一个单行然后输出一个单行，但table-generating函数将一个单输入行转换为多个输出行。下表为Hive内置的table-generating函数。</p>
+<table>
+<thead>
+<tr>
+<th><strong>返回类型</strong></th>
+<th><strong>函数名</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>N rows</td>
+<td>explode(ARRAY)</td>
+<td>参数列为数组类型，将数组数据中的每个元素做为一行返回</td>
+</tr>
+<tr>
+<td>N rows</td>
+<td>explode(MAP)</td>
+<td>将输入map中的每个键值对转换为两列，一列为key，另一列为value，然后返回新行</td>
+</tr>
+<tr>
+<td></td>
+<td>inline(ARRAY&lt;STRUCT[,STRUCT]&gt;)</td>
+<td>分解struct数组到表中</td>
+</tr>
+<tr>
+<td>Array Type</td>
+<td>explode(array&lt;<em>TYPE</em>&gt; a)</td>
+<td>对于数组a中的每个元素，该函数产生包含该元素的行For</td>
+</tr>
+<tr>
+<td>元组</td>
+<td>json_tuple(jsonStr, k1, k2, …)</td>
+<td>参数为一组键k1，k2……和JSON字符串，返回值的元组。该方法比 <code>get_json_object</code> 高效，因为可以在一次调用中输入多个键</td>
+</tr>
+<tr>
+<td>元组</td>
+<td>parse_url_tuple(url, p1, p2, …)</td>
+<td>该方法同<code>parse_url()</code> 相似，但可以一次性提取URL的多个部分，有效的参数名称为： HOST, PATH, QUERY, REF, PROTOCOL, AUTHORITY, FILE, USERINFO, QUERY:<key></key></td>
+</tr>
+<tr>
+<td>N rows</td>
+<td>posexplode(ARRAY)</td>
+<td>行为与参数为数组的explode方法相似，但包含项在原始数组中的位置，返回(pos,value)的二元组</td>
+</tr>
+<tr>
+<td></td>
+<td>stack(INT n, v_1, v_2, …, v_k)</td>
+<td>将v_1, …, v_k 分为n行，每行包含n/k列，n必须为常数</td>
+</tr>
+</tbody>
+</table>
+<p>使用语法”SELECT udtf(col) AS colAlias…”有以下几点限制：</p>
+<ul>
+<li>在SELECT中不允许再有其他表达式：不支持SELECT pageid, explode(adid_list) AS myCol…</li>
+<li>UDTF不能够嵌套使用：不支持SELECT explode(explode(adid_list)) AS myCol…</li>
+<li>不支持GROUP BY /CLUSTER BY / DISTRIBUTE BY / SORT BY：不支持SELECT explode(adid_list) AS myCol … GROUP BY myCol</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/03/Hive/1-什么是Hive/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/03/Hive/4-Hive 中的复合数据结构/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hive内置函数"><span class="nav-number">1.</span> <span class="nav-text">Hive内置函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-number">1.1.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数学函数"><span class="nav-number">1.2.</span> <span class="nav-text">数学函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合函数"><span class="nav-number">1.3.</span> <span class="nav-text">集合函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型转换函数"><span class="nav-number">1.4.</span> <span class="nav-text">类型转换函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期函数"><span class="nav-number">1.5.</span> <span class="nav-text">日期函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件函数"><span class="nav-number">1.6.</span> <span class="nav-text">条件函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串函数"><span class="nav-number">1.7.</span> <span class="nav-text">字符串函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合函数"><span class="nav-number">1.8.</span> <span class="nav-text">聚合函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内置-Table-Generating函数（UDTF）"><span class="nav-number">1.9.</span> <span class="nav-text">内置 Table-Generating函数（UDTF）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

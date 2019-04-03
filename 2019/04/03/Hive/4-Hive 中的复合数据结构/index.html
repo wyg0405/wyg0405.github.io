@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Hive 中的复合数据结构使用目前 hive 支持的复合数据类型有以下几种： map(key1, value1, key2, value2, …) Creates a map with the given key/value pairsstruct(val1, val2, val3, …) Creates a struct with the given field values. Struct f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2019/04/03/Hive/4-Hive 中的复合数据结构/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Hive 中的复合数据结构使用目前 hive 支持的复合数据类型有以下几种： map(key1, value1, key2, value2, …) Creates a map with the given key/value pairsstruct(val1, val2, val3, …) Creates a struct with the given field values. Struct f">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-25T12:38:57.248Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="Hive 中的复合数据结构使用目前 hive 支持的复合数据类型有以下几种： map(key1, value1, key2, value2, …) Creates a map with the given key/value pairsstruct(val1, val2, val3, …) Creates a struct with the given field values. Struct f">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/03/Hive/4-Hive 中的复合数据结构/">
+
+
+
+
+
+  <title> | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/03/Hive/4-Hive 中的复合数据结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-03T15:15:00+08:00">
+                2019-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Hive-中的复合数据结构使用"><a href="#Hive-中的复合数据结构使用" class="headerlink" title="Hive 中的复合数据结构使用"></a>Hive 中的复合数据结构使用</h1><p>目前 hive 支持的复合数据类型有以下几种：</p>
+<p>map<br>(key1, value1, key2, value2, …) Creates a map with the given key/value pairs<br>struct<br>(val1, val2, val3, …) Creates a struct with the given field values. Struct field names will be col1, col2, …<br>named_struct<br>(name1, val1, name2, val2, …) Creates a struct with the given field names and values. (as of Hive 0.8.0)<br>array<br>(val1, val2, …) Creates an array with the given elements<br>create_union<br>(tag, val1, val2, …) Creates a union type with the value that is being pointed to by the tag parameter</p>
+<h2 id="map、struct、array-这3种的用法："><a href="#map、struct、array-这3种的用法：" class="headerlink" title="map、struct、array 这3种的用法："></a>map、struct、array 这3种的用法：</h2><h3 id="1、Array的使用"><a href="#1、Array的使用" class="headerlink" title="1、Array的使用"></a>1、Array的使用</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">创建数据库表，以array作为数据类型</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span>  person(<span class="keyword">name</span> <span class="keyword">string</span>,work_locations <span class="built_in">array</span>&lt;<span class="keyword">string</span>&gt;)</span><br><span class="line"><span class="keyword">ROW</span> <span class="keyword">FORMAT</span> <span class="keyword">DELIMITED</span></span><br><span class="line"><span class="keyword">FIELDS</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">'\t'</span></span><br><span class="line">COLLECTION ITEMS <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">','</span>;</span><br><span class="line"></span><br><span class="line">数据</span><br><span class="line">biansutao beijing,shanghai,tianjin,hangzhou</span><br><span class="line">linan changchu,chengdu,wuhan</span><br><span class="line"></span><br><span class="line">入库数据</span><br><span class="line"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> <span class="keyword">LOCAL</span> INPATH <span class="string">'/home/hadoop/person.txt'</span> OVERWRITE <span class="keyword">INTO</span> <span class="keyword">TABLE</span> person;</span><br><span class="line"></span><br><span class="line">查询</span><br><span class="line">hive&gt; select * from person;</span><br><span class="line">biansutao       ["beijing","shanghai","tianjin","hangzhou"]</span><br><span class="line">linan   ["changchu","chengdu","wuhan"]</span><br><span class="line">Time taken: 0.355 seconds</span><br><span class="line">hive&gt; select name from person;</span><br><span class="line">linan</span><br><span class="line">biansutao</span><br><span class="line">Time taken: 12.397 seconds</span><br><span class="line">hive&gt; select work_locations[0] from person;</span><br><span class="line">changchu</span><br><span class="line">beijing</span><br><span class="line">Time taken: 13.214 seconds</span><br><span class="line">hive&gt; select work_locations from person;   </span><br><span class="line">["changchu","chengdu","wuhan"]</span><br><span class="line">["beijing","shanghai","tianjin","hangzhou"]</span><br><span class="line">Time taken: 13.755 seconds</span><br><span class="line">hive&gt; select work_locations[3] from person;</span><br><span class="line">NULL</span><br><span class="line">hangzhou</span><br><span class="line">Time taken: 12.722 seconds</span><br><span class="line">hive&gt; select work_locations[4] from person;</span><br><span class="line">NULL</span><br><span class="line">NULL</span><br><span class="line">Time taken: 15.958 seconds</span><br></pre></td></tr></table></figure>
+<h3 id="2、Map-的使用"><a href="#2、Map-的使用" class="headerlink" title="2、Map 的使用"></a>2、Map 的使用</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">创建数据库表</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> score(<span class="keyword">name</span> <span class="keyword">string</span>, score <span class="keyword">map</span>&lt;<span class="keyword">string</span>,<span class="built_in">int</span>&gt;)</span><br><span class="line"><span class="keyword">ROW</span> <span class="keyword">FORMAT</span> <span class="keyword">DELIMITED</span></span><br><span class="line"><span class="keyword">FIELDS</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">'\t'</span></span><br><span class="line">COLLECTION ITEMS <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">','</span></span><br><span class="line"><span class="keyword">MAP</span> <span class="keyword">KEYS</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">':'</span>;</span><br><span class="line">要入库的数据</span><br><span class="line">biansutao '数学':80,'语文':89,'英语':95</span><br><span class="line">jobs '语文':60,'数学':80,'英语':99</span><br><span class="line">入库数据</span><br><span class="line"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> <span class="keyword">LOCAL</span> INPATH <span class="string">'/home/hadoop/score.txt'</span> OVERWRITE <span class="keyword">INTO</span> <span class="keyword">TABLE</span> score;</span><br><span class="line">查询</span><br><span class="line">hive&gt; select * from score;</span><br><span class="line">biansutao       &#123;"数学":80,"语文":89,"英语":95&#125;</span><br><span class="line">jobs    &#123;"语文":60,"数学":80,"英语":99&#125;</span><br><span class="line"></span><br><span class="line">hive&gt; select name from score;</span><br><span class="line">jobs</span><br><span class="line">biansutao</span><br><span class="line"></span><br><span class="line">hive&gt; select t.score from score t;</span><br><span class="line">&#123;"语文":60,"数学":80,"英语":99&#125;</span><br><span class="line">&#123;"数学":80,"语文":89,"英语":95&#125;</span><br><span class="line"></span><br><span class="line">hive&gt; select t.score['语文'] from score t;</span><br><span class="line">60</span><br><span class="line">89</span><br><span class="line"></span><br><span class="line">hive&gt; select t.score['英语'] from score t;</span><br><span class="line">99</span><br><span class="line">95</span><br></pre></td></tr></table></figure>
+<h3 id="3、Struct-的使用"><a href="#3、Struct-的使用" class="headerlink" title="3、Struct 的使用"></a>3、Struct 的使用</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">创建数据表</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">test</span>(<span class="keyword">id</span> <span class="built_in">int</span>,course <span class="keyword">struct</span>&lt;course:<span class="keyword">string</span>,score:<span class="built_in">int</span>&gt;)</span><br><span class="line"><span class="keyword">ROW</span> <span class="keyword">FORMAT</span> <span class="keyword">DELIMITED</span></span><br><span class="line"><span class="keyword">FIELDS</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">'\t'</span></span><br><span class="line">COLLECTION ITEMS <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">','</span>;</span><br><span class="line">数据</span><br><span class="line">1 english,80</span><br><span class="line">2 math,89</span><br><span class="line">3 chinese,95</span><br><span class="line">入库</span><br><span class="line"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> <span class="keyword">LOCAL</span> INPATH <span class="string">'/home/hadoop/test.txt'</span> OVERWRITE <span class="keyword">INTO</span> <span class="keyword">TABLE</span> <span class="keyword">test</span>;</span><br><span class="line">查询</span><br><span class="line">hive&gt; select * from test;</span><br><span class="line">OK</span><br><span class="line">1       &#123;"course":"english","score":80&#125;</span><br><span class="line">2       &#123;"course":"math","score":89&#125;</span><br><span class="line">3       &#123;"course":"chinese","score":95&#125;</span><br><span class="line"></span><br><span class="line">hive&gt; select course from test;</span><br><span class="line">&#123;"course":"english","score":80&#125;</span><br><span class="line">&#123;"course":"math","score":89&#125;</span><br><span class="line">&#123;"course":"chinese","score":95&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> t.course.course <span class="keyword">from</span> <span class="keyword">test</span> t; </span><br><span class="line">english</span><br><span class="line">math</span><br><span class="line">chinese</span><br><span class="line"></span><br><span class="line">hive&gt; select t.course.score from test t;</span><br><span class="line">80</span><br><span class="line">89</span><br><span class="line">95</span><br></pre></td></tr></table></figure>
+<h3 id="4、数据组合-（不支持组合的复杂数据类型）"><a href="#4、数据组合-（不支持组合的复杂数据类型）" class="headerlink" title="4、数据组合 （不支持组合的复杂数据类型）"></a>4、数据组合 （不支持组合的复杂数据类型）</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> <span class="keyword">LOCAL</span> INPATH <span class="string">'/home/hadoop/test.txt'</span> OVERWRITE <span class="keyword">INTO</span> <span class="keyword">TABLE</span> <span class="keyword">test</span>;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> test1(<span class="keyword">id</span> <span class="built_in">int</span>,a <span class="keyword">MAP</span>&lt;<span class="keyword">STRING</span>,<span class="built_in">ARRAY</span>&lt;<span class="keyword">STRING</span>&gt;&gt;)</span><br><span class="line"><span class="keyword">row</span> <span class="keyword">format</span> <span class="keyword">delimited</span> <span class="keyword">fields</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">'\t'</span> </span><br><span class="line">collection items <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">','</span></span><br><span class="line"><span class="keyword">MAP</span> <span class="keyword">KEYS</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">':'</span>;</span><br><span class="line">1 english:80,90,70</span><br><span class="line">2 math:89,78,86</span><br><span class="line">3 chinese:99,100,82</span><br><span class="line"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> <span class="keyword">LOCAL</span> INPATH <span class="string">'/home/hadoop/test1.txt'</span> OVERWRITE <span class="keyword">INTO</span> <span class="keyword">TABLE</span> test1;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/03/Hive/3-Hive内置函数/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/03/Hive/5-自定义函数/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hive-中的复合数据结构使用"><span class="nav-number">1.</span> <span class="nav-text">Hive 中的复合数据结构使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#map、struct、array-这3种的用法："><span class="nav-number">1.1.</span> <span class="nav-text">map、struct、array 这3种的用法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Array的使用"><span class="nav-number">1.1.1.</span> <span class="nav-text">1、Array的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Map-的使用"><span class="nav-number">1.1.2.</span> <span class="nav-text">2、Map 的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、Struct-的使用"><span class="nav-number">1.1.3.</span> <span class="nav-text">3、Struct 的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、数据组合-（不支持组合的复杂数据类型）"><span class="nav-number">1.1.4.</span> <span class="nav-text">4、数据组合 （不支持组合的复杂数据类型）</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Hadoop分布式安装[TOC] 说明   本文利用四台centos6机器分别为，hadoop1,hadoop2,hadoop3,hadoop4 在安装hadoop成功前，所有操作均要在三台机器上做 有些配置文件可以先在一台机器上完成配置，然后通过scp发送到另外的机器，以减少工作量   1.修改主机名及映射1[root@hadoop1 ~]# vim /etc/sysconfig/network">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2019/04/03/Hadoop/1-Hadoop分布式安装/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Hadoop分布式安装[TOC] 说明   本文利用四台centos6机器分别为，hadoop1,hadoop2,hadoop3,hadoop4 在安装hadoop成功前，所有操作均要在三台机器上做 有些配置文件可以先在一台机器上完成配置，然后通过scp发送到另外的机器，以减少工作量   1.修改主机名及映射1[root@hadoop1 ~]# vim /etc/sysconfig/network">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-12T14:55:52.703Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="Hadoop分布式安装[TOC] 说明   本文利用四台centos6机器分别为，hadoop1,hadoop2,hadoop3,hadoop4 在安装hadoop成功前，所有操作均要在三台机器上做 有些配置文件可以先在一台机器上完成配置，然后通过scp发送到另外的机器，以减少工作量   1.修改主机名及映射1[root@hadoop1 ~]# vim /etc/sysconfig/network">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/03/Hadoop/1-Hadoop分布式安装/">
+
+
+
+
+
+  <title> | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/03/Hadoop/1-Hadoop分布式安装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-03T15:15:00+08:00">
+                2019-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Hadoop分布式安装"><a href="#Hadoop分布式安装" class="headerlink" title="Hadoop分布式安装"></a>Hadoop分布式安装</h1><p>[TOC]</p>
+<p><strong><code>说明</code></strong></p>
+<blockquote>
+<ol>
+<li>本文利用四台centos6机器分别为，hadoop1,hadoop2,hadoop3,hadoop4</li>
+<li>在安装hadoop成功前，所有操作均要在三台机器上做</li>
+<li>有些配置文件可以先在一台机器上完成配置，然后通过scp发送到另外的机器，以减少工作量</li>
+</ol>
+</blockquote>
+<h2 id="1-修改主机名及映射"><a href="#1-修改主机名及映射" class="headerlink" title="1.修改主机名及映射"></a>1.修改主机名及映射</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 ~]<span class="comment"># vim /etc/sysconfig/network  ##修改主机名</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NETWORKING=yes</span><br><span class="line">HOSTNAME=hadoop1  <span class="comment">###修改为你的主机名，同理另外三台机器分别为hadoop2,hadoop3,hadoop4</span></span><br><span class="line">~</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 ~]<span class="comment"># vim /etc/hosts  ###主机映射</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6 </span><br><span class="line"></span><br><span class="line"><span class="comment">###添加主机映射</span></span><br><span class="line">118.xxx.xxx.xxx hadoop1</span><br><span class="line">118.xxx.xxx.xxx hadoop2</span><br><span class="line">118.xxx.xxx.xxx hadoop3</span><br><span class="line">118.xxx.xxx.xxx hadoop4</span><br></pre></td></tr></table></figure>
+<p>重启使之生效</p>
+<p>注意一下：</p>
+<blockquote>
+<p>如果机器为云服务器，ip填内网ip，机器间传输快</p>
+</blockquote>
+<h2 id="2-创建hadoop用户"><a href="#2-创建hadoop用户" class="headerlink" title="2.创建hadoop用户"></a>2.创建hadoop用户</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop3 ~]<span class="comment"># useradd hadoop    ###添加hadoop用户</span></span><br><span class="line"></span><br><span class="line">[root@hadoop2 ~]<span class="comment"># passwd hadoop     ###给hadoop用户设置密码</span></span><br><span class="line"></span><br><span class="line">[root@hadoop3 ~]<span class="comment"># vim /etc/sudoers  ##为hadoop用户添加sudoers权限</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Allow root to run any commands anywhere </span></span><br><span class="line">root    ALL=(ALL)       ALL</span><br><span class="line">hadoop  ALL=(ALL)       ALL  <span class="comment">###添加此行</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-ssh免密登陆"><a href="#3-ssh免密登陆" class="headerlink" title="3.ssh免密登陆"></a>3.ssh免密登陆</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##切换到hadoop用户</span></span><br><span class="line">[hadoop@hadoop1 ~]$ ssh-keygen</span><br><span class="line"></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/home/hadoop/.ssh/id_rsa): </span><br><span class="line">Created directory <span class="string">'/home/hadoop/.ssh'</span>.</span><br><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase): </span><br><span class="line">Enter same passphrase again: </span><br><span class="line">Your identification has been saved <span class="keyword">in</span> /home/hadoop/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved <span class="keyword">in</span> /home/hadoop/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">1f:ab:b0:22:41:cc:04:46:53:c8:9c:97:1b:08:<span class="built_in">cd</span>:60 hadoop@hadoop1</span><br><span class="line">The key<span class="string">'s randomart image is:</span></span><br><span class="line"><span class="string">+--[ RSA 2048]----+</span></span><br><span class="line"><span class="string">|OE=..            |</span></span><br><span class="line"><span class="string">|o*=+             |</span></span><br><span class="line"><span class="string">| +. o            |</span></span><br><span class="line"><span class="string">|  +.             |</span></span><br><span class="line"><span class="string">| .      S .      |</span></span><br><span class="line"><span class="string">|  .      . o     |</span></span><br><span class="line"><span class="string">|   .  .   o      |</span></span><br><span class="line"><span class="string">|  . .  o .       |</span></span><br><span class="line"><span class="string">|   . .. .        |</span></span><br><span class="line"><span class="string">+-----------------+</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##传输密钥到节点</span></span><br><span class="line">[hadoop@hadoop1 ~]$ ssh-copy-id hadoop1</span><br><span class="line"></span><br><span class="line">The authenticity of host <span class="string">'hadoop1 (xxx.xxx.xxx.xxx)'</span> can<span class="string">'t be established.</span></span><br><span class="line"><span class="string">RSA key fingerprint is f2:8d:2a:43:b4:9d:7e:33:35:5b:ef:a7:67:87:82:08.</span></span><br><span class="line"><span class="string">Are you sure you want to continue connecting (yes/no)? yes</span></span><br><span class="line"><span class="string">Warning: Permanently added '</span>hadoop1,118.24.210.134<span class="string">' (RSA) to the list of known hosts.</span></span><br><span class="line"><span class="string">hadoop@hadoop1'</span>s password: </span><br><span class="line">Now try logging into the machine, with <span class="string">"ssh 'hadoop1'"</span>, and check <span class="keyword">in</span>:</span><br><span class="line"></span><br><span class="line">  .ssh/authorized_keys</span><br><span class="line"></span><br><span class="line">to make sure we haven<span class="string">'t added extra keys that you weren'</span>t expecting.</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop1 ~]$ </span><br><span class="line"></span><br><span class="line"><span class="comment">##同理传输密钥到其他节点</span></span><br><span class="line">[hadoop@hadoop1 ~]$ ssh-copy-id hadoop2</span><br><span class="line">[hadoop@hadoop1 ~]$ ssh-copy-id hadoop3</span><br><span class="line">[hadoop@hadoop1 ~]$ ssh-copy-id hadoop4</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##验证ssh无需密码</span></span><br><span class="line"></span><br><span class="line">[hadoop@hadoop1 ~]$ ssh hadoop1 <span class="comment">##登陆</span></span><br><span class="line">Last login: Mon Jan 21 08:41:48 2019 from 219.140.123.184</span><br><span class="line">[hadoop@hadoop1 ~]$ <span class="built_in">exit</span> <span class="comment">##退出</span></span><br><span class="line"><span class="built_in">logout</span></span><br><span class="line"></span><br><span class="line">[hadoop@hadoop1 ~]$ ssh hadoop2</span><br><span class="line">Last login: Mon Jan 21 08:41:48 2019 from 219.140.123.184</span><br><span class="line">[hadoop@hadoop2 ~]$ </span><br><span class="line">[hadoop@hadoop2 ~]$ <span class="built_in">exit</span></span><br><span class="line"><span class="built_in">logout</span></span><br><span class="line"></span><br><span class="line">[hadoop@hadoop1 ~]$ ssh hadoop3</span><br><span class="line">Last login: Mon Jan 21 08:41:49 2019 from 219.140.123.184</span><br><span class="line">[hadoop@hadoop3 ~]$ <span class="built_in">exit</span></span><br><span class="line"><span class="built_in">logout</span></span><br><span class="line">Connection to hadoop3 closed.</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop1 ~]$ ssh hadoop4</span><br><span class="line">Last login: Mon Jan 21 08:41:49 2019 from 219.140.123.184</span><br><span class="line">[hadoop@hadoop4 ~]$ <span class="built_in">exit</span></span><br><span class="line"><span class="built_in">logout</span></span><br><span class="line">Connection to hadoop4 closed.</span><br><span class="line">[hadoop@hadoop1 ~]$</span><br></pre></td></tr></table></figure>
+<p>这样hadoop1可ssh免密码登陆到hadoo2,hadoop3,haoop4；另外三台机器同理配置</p>
+<h2 id="4-安装JDK"><a href="#4-安装JDK" class="headerlink" title="4.安装JDK"></a>4.安装JDK</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##切换到root，并将实现下好的jdk上传至/user/local,本文安装jdk1.8.0_161</span></span><br><span class="line">[root@hadoop1 <span class="built_in">local</span>]<span class="comment"># cd /usr/local</span></span><br><span class="line">[root@hadoop1 <span class="built_in">local</span>]<span class="comment"># tar -zxvf jdk-8u161-linux-x64.tar.gz </span></span><br><span class="line"></span><br><span class="line">[root@hadoop1 <span class="built_in">local</span>]<span class="comment"># ls</span></span><br><span class="line">bin  etc  games  include  jdk1.8.0_161  jdk-8u161-linux-x64.tar.gz  lib  lib64  libexec  qcloud  sbin  share  src  yd.socket.server</span><br><span class="line"></span><br><span class="line"><span class="comment">##重命名文件夹</span></span><br><span class="line">[root@hadoop1 <span class="built_in">local</span>]<span class="comment"># mv jdk1.8.0_161 jdk8 </span></span><br><span class="line">[root@hadoop1 ~]<span class="comment"># vim /etc/profile</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##在文件尾加上</span></span><br><span class="line"><span class="comment">#Java</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/jdk8</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin</span><br><span class="line"></span><br><span class="line"><span class="comment">#切换为hadoop用户</span></span><br><span class="line">[root@hadoop1 ~]$ <span class="built_in">source</span> /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment">##验证</span></span><br><span class="line">[hadoop@hadoop1 ~]$ java -version</span><br><span class="line"></span><br><span class="line">java version <span class="string">"1.8.0_161"</span></span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_161-b12)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.161-b12, mixed mode</span><br></pre></td></tr></table></figure>
+<p>同理在其他三台机器安装JDK</p>
+<h2 id="5-安装hadoop"><a href="#5-安装hadoop" class="headerlink" title="5.安装hadoop"></a>5.安装hadoop</h2><h3 id="1-分布式系统规划"><a href="#1-分布式系统规划" class="headerlink" title="1.分布式系统规划"></a>1.分布式系统规划</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>hdfs</th>
+<th>yarn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hadoop1</td>
+<td>namenode、datanode</td>
+<td>nodemanager</td>
+</tr>
+<tr>
+<td>hadoop2</td>
+<td>datanode、secondarynamenode</td>
+<td>nodemanager</td>
+</tr>
+<tr>
+<td>hadoop3</td>
+<td>datanode</td>
+<td>resourcemanager、nodemanager</td>
+</tr>
+<tr>
+<td>hadoop4</td>
+<td>datanode</td>
+<td>nodemanager</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-hadoop环境变量配置"><a href="#2-hadoop环境变量配置" class="headerlink" title="2.hadoop环境变量配置"></a>2.hadoop环境变量配置</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop1 ~]$ wget http://mirrors.hust.edu.cn/apache/hadoop/common/hadoop-2.7.6/hadoop-2.7.6.tar.gz</span><br><span class="line">[hadoop@hadoop1 ~]$ tar -zxvf hadoop-2.7.6.tar.gz</span><br><span class="line">[hadoop@hadoop1 ~]$ mv hadoop-2.7.6 hadoop</span><br><span class="line"><span class="comment">##配置hadoop环境变量</span></span><br><span class="line">[hadoop@hadoop1 ~]$ su</span><br><span class="line">[root@hadoop1 ~]<span class="comment"># vim /etc/profile</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Java</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/jdk8</span><br><span class="line"><span class="built_in">export</span> HADOOP_HOME=/home/hadoop/hadoop</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$HADOOP_HOME</span>/bin:<span class="variable">$HADOOP_HOME</span>/sbin</span><br><span class="line">[hadoop@hadoop1 ~]$ <span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##验证</span></span><br><span class="line">[root@hadoop1 hadoop]<span class="comment"># su hadoop</span></span><br><span class="line">[hadoop@hadoop1 ~]$ hadoop version</span><br><span class="line"></span><br><span class="line">Hadoop 2.7.6</span><br><span class="line">Subversion https://shv@git-wip-us.apache.org/repos/asf/hadoop.git -r 085099c66cf28be31604560c376fa282e69282b8</span><br><span class="line">Compiled by kshvachk on 2018-04-18T01:33Z</span><br><span class="line">Compiled with protoc 2.5.0</span><br><span class="line">From <span class="built_in">source</span> with checksum 71e2695531cb3360ab74598755d036</span><br><span class="line">This <span class="built_in">command</span> was run using /home/hadoop/hadoop/share/hadoop/common/hadoop-common-2.7.6.jar</span><br></pre></td></tr></table></figure>
+<h3 id="3-配置文件"><a href="#3-配置文件" class="headerlink" title="3.配置文件"></a>3.配置文件</h3><h4 id="1-修改配置文件"><a href="#1-修改配置文件" class="headerlink" title="1.修改配置文件"></a><strong>1.修改配置文件</strong></h4><p>配置文件目录</p>
+<blockquote>
+<p>hadoop-2.7.6/etc/hadoop/</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop1 ~]$ <span class="built_in">cd</span> hadoop/etc/hadoop/</span><br></pre></td></tr></table></figure>
+<h5 id="1-hadoop-env-sh"><a href="#1-hadoop-env-sh" class="headerlink" title="1.hadoop-env.sh"></a>1.hadoop-env.sh</h5><p>配置JAVA_HOME路径</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The java implementation to use.</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/jdk8</span><br></pre></td></tr></table></figure>
+<h5 id="2-core-site-xml"><a href="#2-core-site-xml" class="headerlink" title="2.core-site.xml"></a>2.core-site.xml</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://hadoop1:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/home/hadoop/data/hadoop/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="3-hdfs-site-xml"><a href="#3-hdfs-site-xml" class="headerlink" title="3.hdfs-site.xml"></a>3.hdfs-site.xml</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.secondary.http-address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hadoop2:50070<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.name.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/home/hadoop/data/hadoop/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.data.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/home/hadoop/data/hadoop/data<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">~</span><br></pre></td></tr></table></figure>
+<h5 id="4-yarn-site-xml"><a href="#4-yarn-site-xml" class="headerlink" title="4.yarn-site.xml"></a>4.yarn-site.xml</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.hostname<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hadoop3<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="5-mapred-site-xml"><a href="#5-mapred-site-xml" class="headerlink" title="5.mapred-site.xml"></a>5.mapred-site.xml</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop1 hadoop]$ cp mapred-site.xml.template mapred-site.xml</span><br><span class="line">[hadoop@hadoop1 hadoop]$ vim mapred-site.xml</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.framework.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>yarn<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.jobhistory.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hadoop1:10020<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.jobhistory.webapp.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hadoop1:19888<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>#####6.slaves</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hadoop1</span><br><span class="line">hadoop2</span><br><span class="line">hadoop3</span><br><span class="line">hadoop4</span><br></pre></td></tr></table></figure>
+<h3 id="4-格式化"><a href="#4-格式化" class="headerlink" title="4.格式化"></a>4.格式化</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop1 hadoop]$ hadoop namenode -format  <span class="comment">##在namenode上执行格式化</span></span><br></pre></td></tr></table></figure>
+<h3 id="5-启动与停止"><a href="#5-启动与停止" class="headerlink" title="5.启动与停止"></a>5.启动与停止</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop1 hadoop]$ start-dfs.sh</span><br><span class="line">Starting namenodes on [hadoop1]</span><br><span class="line">hadoop1: starting namenode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-namenode-hadoop1.out</span><br><span class="line">hadoop4: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-hadoop4.out</span><br><span class="line">hadoop3: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-hadoop3.out</span><br><span class="line">hadoop2: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-hadoop2.out</span><br><span class="line">hadoop1: starting datanode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-datanode-hadoop1.out</span><br><span class="line">Starting secondary namenodes [hadoop2]</span><br><span class="line">hadoop2: starting secondarynamenode, logging to /home/hadoop/hadoop/logs/hadoop-hadoop-secondarynamenode-hadoop2.out</span><br></pre></td></tr></table></figure>
+<p><strong><code>注意，yarn最好在resourcemanager节点上启动</code></strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop3 hadoop]$ start-yarn.sh</span><br><span class="line">starting yarn daemons</span><br><span class="line">resourcemanager running as process 6172. Stop it first.</span><br><span class="line">hadoop2: Warning: Permanently added the RSA host key <span class="keyword">for</span> IP address <span class="string">'172.xx.0.7'</span> to the list of known hosts.</span><br><span class="line">hadoop4: Warning: Permanently added the RSA host key <span class="keyword">for</span> IP address <span class="string">'172.xx.0.4'</span> to the list of known hosts.</span><br><span class="line">hadoop1: Warning: Permanently added the RSA host key <span class="keyword">for</span> IP address <span class="string">'172.xx.0.12'</span> to the list of known hosts.</span><br><span class="line">hadoop2: starting nodemanager, logging to /home/hadoop/hadoop/logs/yarn-hadoop-nodemanager-hadoop2.out</span><br><span class="line">hadoop3: starting nodemanager, logging to /home/hadoop/hadoop/logs/yarn-hadoop-nodemanager-hadoop3.out</span><br><span class="line">hadoop4: starting nodemanager, logging to /home/hadoop/hadoop/logs/yarn-hadoop-nodemanager-hadoop4.out</span><br><span class="line">hadoop1: starting nodemanager, logging to /home/hadoop/hadoop/logs/yarn-hadoop-nodemanager-hadoop1.out</span><br></pre></td></tr></table></figure>
+<p>查看进程</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop1 hadoop]$ jps</span><br><span class="line">8482 NodeManager</span><br><span class="line">8167 DataNode</span><br><span class="line">8024 NameNode</span><br><span class="line">8637 Jps</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop2 hadoop]$ jps</span><br><span class="line">7571 NodeManager</span><br><span class="line">7435 SecondaryNameNode</span><br><span class="line">7740 Jps</span><br><span class="line">7325 DataNode</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop3 hadoop]$ jps</span><br><span class="line">6172 ResourceManager</span><br><span class="line">7501 DataNode</span><br><span class="line">7918 Jps</span><br><span class="line">7758 NodeManager</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop4 ~]$ jps</span><br><span class="line">7280 DataNode</span><br><span class="line">7635 Jps</span><br><span class="line">7467 NodeManager</span><br></pre></td></tr></table></figure>
+<p>也可以访问<a href="http://hadoop1:50070查看" target="_blank" rel="noopener">http://hadoop1:50070查看</a></p>
+<h2 id="6-时间同步"><a href="#6-时间同步" class="headerlink" title="6.时间同步"></a>6.时间同步</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop1 ~]<span class="comment"># date</span></span><br><span class="line">Mon Jan 21 10:31:51 CST 2019  <span class="comment">##区正确</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##系统没有安装ntp，有则不用安装</span></span><br><span class="line">[root@hadoop1 ~]<span class="comment"># yum -y install ntpdate ntp</span></span><br><span class="line">[root@hadoop1 ~]<span class="comment"># ntpdate  ntp1.aliyun.com </span></span><br><span class="line">21 Jan 11:02:06 ntpdate[3318]: adjust time server 118.24.195.65 offset 0.016580 sec</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##如果出现</span></span><br><span class="line">21 Jan 10:43:49 ntpdate[1761]: the NTP socket is <span class="keyword">in</span> use, exiting</span><br><span class="line"><span class="comment">##先停止ntp，再ntpdate</span></span><br><span class="line">[root@hadoop1 ~]<span class="comment"># service ntpd stop</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/03/Hadoop/0-大数据学习路线/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/03/Hadoop/10-Combiner/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hadoop分布式安装"><span class="nav-number">1.</span> <span class="nav-text">Hadoop分布式安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-修改主机名及映射"><span class="nav-number">1.1.</span> <span class="nav-text">1.修改主机名及映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-创建hadoop用户"><span class="nav-number">1.2.</span> <span class="nav-text">2.创建hadoop用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-ssh免密登陆"><span class="nav-number">1.3.</span> <span class="nav-text">3.ssh免密登陆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-安装JDK"><span class="nav-number">1.4.</span> <span class="nav-text">4.安装JDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-安装hadoop"><span class="nav-number">1.5.</span> <span class="nav-text">5.安装hadoop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-分布式系统规划"><span class="nav-number">1.5.1.</span> <span class="nav-text">1.分布式系统规划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-hadoop环境变量配置"><span class="nav-number">1.5.2.</span> <span class="nav-text">2.hadoop环境变量配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-配置文件"><span class="nav-number">1.5.3.</span> <span class="nav-text">3.配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-修改配置文件"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">1.修改配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-hadoop-env-sh"><span class="nav-number">1.5.3.1.1.</span> <span class="nav-text">1.hadoop-env.sh</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-core-site-xml"><span class="nav-number">1.5.3.1.2.</span> <span class="nav-text">2.core-site.xml</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-hdfs-site-xml"><span class="nav-number">1.5.3.1.3.</span> <span class="nav-text">3.hdfs-site.xml</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-yarn-site-xml"><span class="nav-number">1.5.3.1.4.</span> <span class="nav-text">4.yarn-site.xml</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-mapred-site-xml"><span class="nav-number">1.5.3.1.5.</span> <span class="nav-text">5.mapred-site.xml</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-格式化"><span class="nav-number">1.5.4.</span> <span class="nav-text">4.格式化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-启动与停止"><span class="nav-number">1.5.5.</span> <span class="nav-text">5.启动与停止</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-时间同步"><span class="nav-number">1.6.</span> <span class="nav-text">6.时间同步</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

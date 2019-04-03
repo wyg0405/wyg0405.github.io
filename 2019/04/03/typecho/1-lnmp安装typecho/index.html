@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.搭建 LNMP 环境1. 什么是 LNMPLNMP 指是Linux（操作系统）、Nginx（HTTP 服务器），MySQL（数据库软件） 和PHP的第一个字母，主要用来建立web应用平台。 还记得我们之前购买实例的时候，有选择 CentOS 吗？这就是 Linux 的发行版之一。所以，实际上我们只需要安装 NMP（好像有什么奇怪的东西混进来了？LOL）。 2. 搭建 NMP有非常方便的一键安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2019/04/03/typecho/1-lnmp安装typecho/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.搭建 LNMP 环境1. 什么是 LNMPLNMP 指是Linux（操作系统）、Nginx（HTTP 服务器），MySQL（数据库软件） 和PHP的第一个字母，主要用来建立web应用平台。 还记得我们之前购买实例的时候，有选择 CentOS 吗？这就是 Linux 的发行版之一。所以，实际上我们只需要安装 NMP（好像有什么奇怪的东西混进来了？LOL）。 2. 搭建 NMP有非常方便的一键安装">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-21T09:06:09.348Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="1.搭建 LNMP 环境1. 什么是 LNMPLNMP 指是Linux（操作系统）、Nginx（HTTP 服务器），MySQL（数据库软件） 和PHP的第一个字母，主要用来建立web应用平台。 还记得我们之前购买实例的时候，有选择 CentOS 吗？这就是 Linux 的发行版之一。所以，实际上我们只需要安装 NMP（好像有什么奇怪的东西混进来了？LOL）。 2. 搭建 NMP有非常方便的一键安装">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/03/typecho/1-lnmp安装typecho/">
+
+
+
+
+
+  <title> | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/03/typecho/1-lnmp安装typecho/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-03T15:15:00+08:00">
+                2019-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-搭建-LNMP-环境"><a href="#1-搭建-LNMP-环境" class="headerlink" title="1.搭建 LNMP 环境"></a>1.搭建 LNMP 环境</h2><h3 id="1-什么是-LNMP"><a href="#1-什么是-LNMP" class="headerlink" title="1. 什么是 LNMP"></a>1. 什么是 LNMP</h3><p><a href="http://www.kamyu.top/go/aHR0cHM6Ly9iYWlrZS5iYWlkdS5jb20vaXRlbS9sbm1w" target="_blank" rel="noopener">LNMP</a> 指是Linux（操作系统）、Nginx（HTTP 服务器），MySQL（数据库软件） 和PHP的第一个字母，主要用来建立web应用平台。</p>
+<p>还记得我们之前购买实例的时候，有选择 <em>CentOS</em> 吗？这就是 Linux 的发行版之一。所以，实际上我们只需要安装 NMP（好像有什么奇怪的东西混进来了？LOL）。</p>
+<h3 id="2-搭建-NMP"><a href="#2-搭建-NMP" class="headerlink" title="2. 搭建 NMP"></a>2. 搭建 NMP</h3><p>有非常方便的<a href="https://lnmp.org/" target="_blank" rel="noopener">一键安装包</a>帮助我们。</p>
+<p>在 SSH 里面，我们输入：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@blog ~]<span class="comment"># wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz -cO lnmp1.5.tar.gz &amp;&amp; tar zxf lnmp1.5.tar.gz &amp;&amp; cd lnmp1.5 &amp;&amp; ./install.sh lnmp</span></span><br></pre></td></tr></table></figure>
+<p>运行上述LNMP安装命令后，很快就到了下面的界面，所有选项都选择 Default 的数字序号就可以了，需要特别注意的是，<strong>必须记住数据库的密码：</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">+------------------------------------------------------------------------+</span><br><span class="line">|          LNMP V1.5 <span class="keyword">for</span> CentOS Linux Server, Written by Licess          |</span><br><span class="line">+------------------------------------------------------------------------+</span><br><span class="line">|        A tool to auto-compile &amp; install LNMP/LNMPA/LAMP on Linux       |</span><br><span class="line">+------------------------------------------------------------------------+</span><br><span class="line">|           For more information please visit https://lnmp.org           |</span><br><span class="line">+------------------------------------------------------------------------+</span><br><span class="line">You have 10 options <span class="keyword">for</span> your DataBase install.</span><br><span class="line">1: Install MySQL 5.1.73</span><br><span class="line">2: Install MySQL 5.5.60 (Default)</span><br><span class="line">3: Install MySQL 5.6.40</span><br><span class="line">4: Install MySQL 5.7.22</span><br><span class="line">5: Install MySQL 8.0.11</span><br><span class="line">6: Install MariaDB 5.5.60</span><br><span class="line">7: Install MariaDB 10.0.35</span><br><span class="line">8: Install MariaDB 10.1.33</span><br><span class="line">9: Install MariaDB 10.2.14</span><br><span class="line">0: DO NOT Install MySQL/MariaDB</span><br><span class="line">Enter your choice (1, 2, 3, 4, 5, 6, 7, 8, 9 or 0): 2</span><br><span class="line"></span><br><span class="line">You will install MySQL 5.5.60</span><br><span class="line"></span><br><span class="line">Please setup root password of MySQL.</span><br><span class="line">Please enter: xxxxxx  <span class="comment">##记住mysql root 用户密码</span></span><br><span class="line"></span><br><span class="line">MySQL root password: xxxxxx</span><br><span class="line"></span><br><span class="line">Do you want to <span class="built_in">enable</span> or <span class="built_in">disable</span> the InnoDB Storage Engine?</span><br><span class="line">Default <span class="built_in">enable</span>,Enter your choice [Y/n]: n</span><br><span class="line"></span><br><span class="line">You will <span class="built_in">disable</span> the InnoDB Storage Engine!</span><br><span class="line"></span><br><span class="line">You have 8 options <span class="keyword">for</span> your PHP install.</span><br><span class="line">1: Install PHP 5.2.17</span><br><span class="line">2: Install PHP 5.3.29</span><br><span class="line">3: Install PHP 5.4.45</span><br><span class="line">4: Install PHP 5.5.38</span><br><span class="line">5: Install PHP 5.6.36 (Default)</span><br><span class="line">6: Install PHP 7.0.30</span><br><span class="line">7: Install PHP 7.1.18</span><br><span class="line">8: Install PHP 7.2.6</span><br><span class="line"></span><br><span class="line">Enter your choice (1, 2, 3, 4, 5, 6, 7 or 8): 4</span><br><span class="line"></span><br><span class="line">You will install PHP 5.6.36</span><br><span class="line"></span><br><span class="line">You have 3 options <span class="keyword">for</span> your Memory Allocator install.</span><br><span class="line">1: Don<span class="string">'t install Memory Allocator. (Default)</span></span><br><span class="line"><span class="string">2: Install Jemalloc</span></span><br><span class="line"><span class="string">3: Install TCMalloc</span></span><br><span class="line"><span class="string">Enter your choice (1, 2 or 3): 1</span></span><br><span class="line"><span class="string">You will install not install Memory Allocator.</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>提示”Press any key to install…or Press Ctrl+c to cancel”后，按回车键确认开始安装。<br>LNMP脚本就会自动安装编译Nginx、MySQL、PHP、phpMyAdmin等软件及相关的组件</p>
+<p>安装时间可能会几十分钟到几个小时不等，主要是机器的配置网速等原因会造成影响。</p>
+</blockquote>
+<p>引用来自： <a href="https://lnmp.org/install.html" target="_blank" rel="noopener">LNMP安装帮助</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">Checking ...</span><br><span class="line">Nginx: OK</span><br><span class="line">MySQL: OK</span><br><span class="line">PHP: OK</span><br><span class="line">PHP-FPM: OK</span><br><span class="line">Clean src directory...</span><br><span class="line">+------------------------------------------------------------------------+</span><br><span class="line">|          LNMP V1.5 <span class="keyword">for</span> CentOS Linux Server, Written by Licess          |</span><br><span class="line">+------------------------------------------------------------------------+</span><br><span class="line">|           For more information please visit https://lnmp.org           |</span><br><span class="line">+------------------------------------------------------------------------+</span><br><span class="line">|    lnmp status manage: lnmp &#123;start|stop|reload|restart|<span class="built_in">kill</span>|status&#125;    |</span><br><span class="line">+------------------------------------------------------------------------+</span><br><span class="line">|  phpMyAdmin: http://IP/phpmyadmin/                                     |</span><br><span class="line">|  phpinfo: http://IP/phpinfo.php                                        |</span><br><span class="line">|  Prober:  http://IP/p.php                                              |</span><br><span class="line">+------------------------------------------------------------------------+</span><br><span class="line">|  Add VirtualHost: lnmp vhost add                                       |</span><br><span class="line">+------------------------------------------------------------------------+</span><br><span class="line">|  Default directory: /home/wwwroot/default                              |</span><br><span class="line">+------------------------------------------------------------------------+</span><br><span class="line">|  MySQL/MariaDB root password: myblog                          |</span><br><span class="line">+------------------------------------------------------------------------+</span><br><span class="line">+-------------------------------------------+</span><br><span class="line">|    Manager <span class="keyword">for</span> LNMP, Written by Licess    |</span><br><span class="line">+-------------------------------------------+</span><br><span class="line">|              https://lnmp.org             |</span><br><span class="line">+-------------------------------------------+</span><br><span class="line">nginx (pid 17315 17314 17313) is running...</span><br><span class="line">php-fpm is runing!</span><br><span class="line"> SUCCESS! MySQL running (17714)</span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address               Foreign Address             State      </span><br><span class="line">tcp        0      0 0.0.0.0:80                  0.0.0.0:*                   LISTEN      </span><br><span class="line">tcp        0      0 0.0.0.0:28436               0.0.0.0:*                   LISTEN      </span><br><span class="line">tcp        0      0 0.0.0.0:3306                0.0.0.0:*                   LISTEN      </span><br><span class="line">tcp        0      0 :::28436                    :::*                        LISTEN      </span><br><span class="line">Install lnmp takes 18 minutes.</span><br><span class="line">Install lnmp V1.5 completed! enjoy it.</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果显示Nginx: OK，MySQL: OK，PHP: OK</p>
+<p>并且Nginx、MySQL、PHP都是running，80和3306端口都存在，并提示安装使用的时间及Install lnmp V1.5 completed! enjoy it.的话，说明已经安装成功。<br>某些系统可能会一直卡在Install lnmp V1.5 completed! enjoy it.不自动退出，可以按Ctrl+c退出。</p>
+</blockquote>
+<p>引用来自： <a href="http://www.kamyu.top/go/aHR0cHM6Ly9sbm1wLm9yZy9pbnN0YWxsLmh0bWw=" target="_blank" rel="noopener">LNMP安装帮助</a></p>
+<ul>
+<li>需要注意，80 和 3306 端口都必须已经在你的服务器中开启！</li>
+<li>如果没有正确地完成，你可以访问 <a href="http://www.kamyu.top/go/aHR0cHM6Ly9sbm1wLm9yZy9pbnN0YWxsLmh0bWw=" target="_blank" rel="noopener">LNMP安装帮助</a> 来查看官方的文档。</li>
+<li>如果已经完成，恭喜你！离搭建完成不远了！</li>
+</ul>
+<h2 id="2-添加域名"><a href="#2-添加域名" class="headerlink" title="2.添加域名"></a>2.添加域名</h2><p>添加域名：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lnmp vhost add</span><br></pre></td></tr></table></figure>
+<p>回车，提示输入域名：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">www.wuyg.top <span class="comment"># 这里输入www.你的域名</span></span><br><span class="line">Please enter domain(example: www.lnmp.org): www.wuyg.top</span><br><span class="line">Your domain: www.wuyg.top</span><br></pre></td></tr></table></figure>
+<p>回车，提示是否添加多个域名：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wuyg.top <span class="comment"># 这里输入你的顶级域名</span></span><br><span class="line">Enter more domain name(example: lnmp.org *.lnmp.org): wuyg.top *.wuyg.top</span><br><span class="line"> domain list: wuyg.top *.wuyg.top</span><br></pre></td></tr></table></figure>
+<p>回车，显示网站目录。默认即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Default directory: /home/wwwroot/www.wuyg.top: </span><br><span class="line">Virtual Host Directory: /home/wwwroot/www.wuyg.top</span><br></pre></td></tr></table></figure>
+<p>注意：这里会让你输入是否开启伪静态（Allow rewrite rules？）</p>
+<blockquote>
+<p>伪静态可以使URL更加简洁也利于SEO，如程序支持并且需要设置伪静态的话，如启用输入 y ，不启用输入 n 回车(注意LNMPA或LAMP模式没有该选择项！)。</p>
+</blockquote>
+<p>由于我们准备安装的是 Typecho，后面显示 URL 需要优化，我们需要开启伪静态，我们这里输入 y</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y</span><br></pre></td></tr></table></figure>
+<p>下面会问你怎么选伪静态配置文件，默认已经有了discuz、discuzx、discuzx2(Discuz X二级目录)、wordpress、wp2(WordPress二级目录)、typecho、typecho2(Typecho二级目录)、sablog、emlog、dabr、phpwind、、dedecms、drupal、ecshop、shopex。</p>
+<p>很明显我们应该选 typecho：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typecho</span><br></pre></td></tr></table></figure>
+<p>回车，开启日志记录：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y</span><br></pre></td></tr></table></figure>
+<p>回车后，输入站长邮箱即可。</p>
+<p>继续回车，提示数据库名和数据库用户名是否保持一致。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y</span><br></pre></td></tr></table></figure>
+<p>回车，输入 <em>root</em> 用户的数据库密码（上面配置 LNMP 时让你记住的密码），这里是不会显示密码的，输入后回车即可。</p>
+<p>回车，输入数据库名，如：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typecho_db</span><br></pre></td></tr></table></figure>
+<p>回车，设置数据库密码。例如：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typecho_db_password</span><br></pre></td></tr></table></figure>
+<p>是否需要开启SSL/HTTPS访问，我们这里先不开启：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">n</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>提示 <em>Press any key to start create virtul host…</em> 后，回车确认便会开始创建虚拟主机。</p>
+<p>添加成功会提示添加的域名、目录、伪静态、日志、数据库、FTP等相关信息</p>
+</blockquote>
+<p>以上引用来自：<a href="http://www.kamyu.top/go/aHR0cHM6Ly9sbm1wLm9yZy9mYXEvbG5tcC12aG9zdC1hZGQtaG93dG8uaHRtbA==" target="_blank" rel="noopener">LNMP添加虚拟主机帮助</a></p>
+<p>如（这些信息你可以保存起来）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">================================================</span><br><span class="line">Virtualhost infomation:</span><br><span class="line">Your domain: 你的域名</span><br><span class="line">Home Directory: 你的主页路径</span><br><span class="line">Rewrite: typecho</span><br><span class="line">Enable <span class="built_in">log</span>: yes</span><br><span class="line">Database username: 你的数据库名字</span><br><span class="line">Database userpassword: 你的数据库密码</span><br><span class="line">Database Name: 你的数据库名字</span><br><span class="line">Create ftp account: no</span><br><span class="line">================================================</span><br></pre></td></tr></table></figure>
+<p>如果需要更详细的信息，可以前往<a href="http://www.kamyu.top/go/aHR0cHM6Ly9sbm1wLm9yZy9mYXEvbG5tcC12aG9zdC1hZGQtaG93dG8uaHRtbA==" target="_blank" rel="noopener">LNMP添加虚拟主机帮助</a>。</p>
+<h2 id="3-安装-Typecho"><a href="#3-安装-Typecho" class="headerlink" title="3. 安装 Typecho"></a>3. 安装 Typecho</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@host wuyg.top]<span class="comment"># cd /home/wwwroot/wuyg.top/</span></span><br><span class="line">[root@host wuyg.top]<span class="comment"># wget http://typecho.org/downloads/1.1-17.10.30-release.tar.gz</span></span><br><span class="line">[root@host wuyg.top]<span class="comment"># mv build/* .</span></span><br><span class="line">[root@host wuyg.top]<span class="comment"># rm -rf build/</span></span><br></pre></td></tr></table></figure>
+<p>访问你的域名，进行配置</p>
+<h2 id="4-安装SSL证书"><a href="#4-安装SSL证书" class="headerlink" title="4.安装SSL证书"></a>4.安装SSL证书</h2><h3 id="1-一键生成证书"><a href="#1-一键生成证书" class="headerlink" title="1.一键生成证书"></a>1.一键生成证书</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@blog ~]<span class="comment"># lnmp ssl add</span></span><br><span class="line"></span><br><span class="line">Please enter domain(example: www.lnmp.org): www.wuyg.top</span><br><span class="line">Your domain: www.wuyg.top</span><br><span class="line">Enter more domain name(example: lnmp.org *.lnmp.org):</span><br><span class="line">Please enter the directory <span class="keyword">for</span> domain v.laobuluo.com: /home/wwwroot/wuyu.top</span><br><span class="line">Allow Rewrite rule? (y/n) y</span><br><span class="line">Please enter the rewrite of programme,</span><br><span class="line">wordpress,discuz,typecho,sablog,typecho rewrite was exist.</span><br><span class="line">(Default rewrite: other): wordpress</span><br><span class="line">You choose rewrite: typecho</span><br><span class="line">Allow access <span class="built_in">log</span>? (y/n) y</span><br><span class="line">Enter access <span class="built_in">log</span> filename(Default:www.wuyg.top.log):</span><br><span class="line">You access <span class="built_in">log</span> filename: www.wuyg.top.log</span><br><span class="line">1: Use your own SSL Certificate and Key</span><br><span class="line">2: Use Let<span class="string">'s Encrypt to create SSL Certificate and Key</span></span><br><span class="line"><span class="string">Enter 1 or 2: 2</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-本文是生成通配符证书比较麻烦"><a href="#2-本文是生成通配符证书比较麻烦" class="headerlink" title="2.本文是生成通配符证书比较麻烦"></a>2.本文是<strong><code>生成通配符证书</code></strong>比较麻烦</h3><blockquote>
+<p>Wildcard certificate俗称野卡正式点一般称为通配符或泛域名证书，也就是为*.wyg.top签发包含所有子域名的SSL证书</p>
+<p>LNMP 1.5已经添加了对通配符证书的支持，生成通配符证书和Let’sEncrypt平常SSL证书命令有些差异（通配符证书命令是 <strong>lnmp dnsssl</strong> 域名dns服务商简称，普通证书是<strong>lnmp ssl add</strong>），最好是使用域名DNS服务商的API，这样才能实现自动续期。</p>
+</blockquote>
+<p>可参考<a href="https://lnmp.org/faq/letsencrypt-wildcard-ssl.html" target="_blank" rel="noopener">官方教程</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">###本人用的阿里云的域名，域名DNS服务商API操作所需的参数，如Key、Secret如下</span></span><br><span class="line">[root@host wuyg.top]<span class="comment"># export Ali_Key="xxxxxx" </span></span><br><span class="line">[root@host wuyg.top]<span class="comment"># export Ali_Secret="xxxxxx"</span></span><br></pre></td></tr></table></figure>
+<p>下面开工开始添加虚拟主机并生成通配符SSL证书，命令：<strong>lnmp dnsssl ali或 lnmp dns ali</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">[root@host wuyg.top]<span class="comment"># lnmp dnsssl ali</span></span><br><span class="line">+-------------------------------------------+</span><br><span class="line">|    Manager <span class="keyword">for</span> LNMP, Written by Licess    |</span><br><span class="line">+-------------------------------------------+</span><br><span class="line">|              https://lnmp.org             |</span><br><span class="line">+-------------------------------------------+</span><br><span class="line">/usr/<span class="built_in">local</span>/acme.sh/acme.sh [found]</span><br><span class="line">Please enter domain(example: www.lnmp.org): wuyg.top</span><br><span class="line"> Your domain: wuyg.top  <span class="comment">##注意：如果要生成通配符/泛域名SSL证书，输入其他域名时不要输入www.wuyg.top 的域名，否则将生成失败！！！</span></span><br><span class="line">Enter more domain name(example: lnmp.org *.lnmp.org): *.wuyg.top</span><br><span class="line"> domain list: *.wuyg.top <span class="comment">##输入其他域名</span></span><br><span class="line">Please enter the directory <span class="keyword">for</span> domain wuyg.top: /home/wwwroot/wuyg.top <span class="comment">##typecho目录</span></span><br><span class="line">Allow Rewrite rule? (y/n) y <span class="comment">##是否添加伪静态</span></span><br><span class="line">Please enter the rewrite of programme, </span><br><span class="line">wordpress,discuzx,typecho,thinkphp,laravel,codeigniter,yii2 rewrite was exist.</span><br><span class="line">(Default rewrite: other): typecho</span><br><span class="line">You choose rewrite: typecho</span><br><span class="line">Allow access <span class="built_in">log</span>? (y/n) y</span><br><span class="line">Enter access <span class="built_in">log</span> filename(Default:wuyg.top.log): </span><br><span class="line">You access <span class="built_in">log</span> filename: wuyg.top.log</span><br><span class="line">Enable PHP Pathinfo? (y/n) y</span><br><span class="line">Enable pathinfo.</span><br><span class="line">Starting create SSL Certificate use Let<span class="string">'s Encrypt...</span></span><br><span class="line"><span class="string">[Sat Jan 19 00:33:56 CST 2019] Multi domain='</span>DNS:wuyg.top,DNS:*.wuyg.top<span class="string">'</span></span><br><span class="line"><span class="string">[Sat Jan 19 00:33:56 CST 2019] Getting domain auth token for each domain</span></span><br><span class="line"><span class="string">[Sat Jan 19 00:33:57 CST 2019] Getting webroot for domain='</span>wuyg.top<span class="string">'</span></span><br><span class="line"><span class="string">[Sat Jan 19 00:33:57 CST 2019] Getting webroot for domain='</span>*.wuyg.top<span class="string">'</span></span><br><span class="line"><span class="string">[Sat Jan 19 00:33:57 CST 2019] Found domain api file: /usr/local/acme.sh/dnsapi/dns_ali.sh</span></span><br><span class="line"><span class="string">[Sat Jan 19 00:34:01 CST 2019] Found domain api file: /usr/local/acme.sh/dnsapi/dns_ali.sh</span></span><br><span class="line"><span class="string">[Sat Jan 19 00:34:04 CST 2019] Sleep 120 seconds for the txt records to take effect ##等待两分钟</span></span><br><span class="line"><span class="string">[Sat Jan 19 00:36:06 CST 2019] Verifying:wuyg.top</span></span><br><span class="line"><span class="string">[Sat Jan 19 00:36:08 CST 2019] Success</span></span><br><span class="line"><span class="string">[Sat Jan 19 00:36:08 CST 2019] Verifying:*.wuyg.top</span></span><br><span class="line"><span class="string">[Sat Jan 19 00:36:10 CST 2019] Success</span></span><br><span class="line"><span class="string">[Sat Jan 19 00:36:10 CST 2019] Removing DNS records.</span></span><br><span class="line"><span class="string">[Sat Jan 19 00:36:26 CST 2019] Verify finished, start to sign.</span></span><br><span class="line"><span class="string">[Sat Jan 19 00:36:27 CST 2019] Cert success.</span></span><br><span class="line"><span class="string">[Sat Jan 19 00:36:27 CST 2019] Your cert is in  /usr/local/nginx/conf/ssl/wuyg.top/wuyg.top.cer </span></span><br><span class="line"><span class="string">[Sat Jan 19 00:36:27 CST 2019] Your cert key is in  /usr/local/nginx/conf/ssl/wuyg.top/wuyg.top.key </span></span><br><span class="line"><span class="string">[Sat Jan 19 00:36:27 CST 2019] The intermediate CA cert is in  /usr/local/nginx/conf/ssl/wuyg.top/ca.cer </span></span><br><span class="line"><span class="string">[Sat Jan 19 00:36:27 CST 2019] And the full chain certs is there:  /usr/local/nginx/conf/ssl/wuyg.top/fullchain.cer </span></span><br><span class="line"><span class="string">[Sat Jan 19 00:36:27 CST 2019] Run reload cmd: /etc/init.d/nginx reload</span></span><br><span class="line"><span class="string">Reload service nginx...  done</span></span><br><span class="line"><span class="string">[Sat Jan 19 00:36:27 CST 2019] Reload success</span></span><br><span class="line"><span class="string">Create dhparam.pem...</span></span><br><span class="line"><span class="string">Generating DH parameters, 2048 bit long safe prime, generator 2</span></span><br><span class="line"><span class="string">This is going to take a long time</span></span><br><span class="line"><span class="string">............................................................+..............................................++*++*</span></span><br><span class="line"><span class="string">Test Nginx configure file......</span></span><br><span class="line"><span class="string">nginx: the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok</span></span><br><span class="line"><span class="string">nginx: configuration file /usr/local/nginx/conf/nginx.conf test is successful</span></span><br><span class="line"><span class="string">Reload Nginx......</span></span><br><span class="line"><span class="string">Let'</span>s Encrypt SSL Certificate create successfully.</span><br></pre></td></tr></table></figure>
+<p>再通过https访问你的域名，发现 可以了</p>
+<h3 id="3-强制https访问"><a href="#3-强制https访问" class="headerlink" title="3.强制https访问"></a>3.强制https访问</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">[root@blog nginx]<span class="comment"># cd   </span></span><br><span class="line">[root@blog vhost]<span class="comment"># vi wuyg.top.conf  ##编辑站点ngixn配置</span></span><br><span class="line"></span><br><span class="line">server</span><br><span class="line">    &#123;</span><br><span class="line">        listen 80;</span><br><span class="line">        <span class="comment">#listen [::]:80;</span></span><br><span class="line">        server_name wuyg.top *.wuyg.top;</span><br><span class="line">        index index.html index.htm index.php default.html default.htm default.php;</span><br><span class="line">        root  /home/wwwroot/wuyg.top;</span><br><span class="line"></span><br><span class="line">        rewrite ^(.*) https://<span class="variable">$server_name</span><span class="variable">$1</span> permanent; <span class="comment">###加上这句</span></span><br><span class="line"></span><br><span class="line">        include rewrite/typecho.conf;</span><br><span class="line">        <span class="comment">#error_page   404   /404.html;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Deny access to PHP files in specific directory</span></span><br><span class="line">        <span class="comment">#location ~ /(wp-content|uploads|wp-includes|images)/.*\.php$ &#123; deny all; &#125;</span></span><br><span class="line"></span><br><span class="line">        include <span class="built_in">enable</span>-php-pathinfo.conf;</span><br><span class="line"></span><br><span class="line">        location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$</span><br><span class="line">        &#123;</span><br><span class="line">            expires      30d;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location ~ .*\.(js|css)?$</span><br><span class="line">        &#123;</span><br><span class="line">            expires      12h;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location ~ /.well-known &#123;</span><br><span class="line">            allow all;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location ~ /\.</span><br><span class="line">        &#123;</span><br><span class="line">            deny all;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        access_log  /home/wwwlogs/wuyg.top.log;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">[root@blog vhost]<span class="comment"># service nginx restart  ##重启ngixn</span></span><br></pre></td></tr></table></figure>
+<h2 id="5-安全-amp-优化-amp-遇到的问题"><a href="#5-安全-amp-优化-amp-遇到的问题" class="headerlink" title="5. 安全 &amp; 优化 &amp; 遇到的问题"></a>5. 安全 &amp; 优化 &amp; 遇到的问题</h2><h3 id="1-安全考虑（强烈建议）"><a href="#1-安全考虑（强烈建议）" class="headerlink" title="1. 安全考虑（强烈建议）"></a>1. 安全考虑（强烈建议）</h3><p>为了安全，建议将 <code>phpmyadmin</code> 目录重命名为不容易猜到的目录（比如：XXX）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/wwwroot/default</span><br><span class="line">mv phpmyadmin XXX</span><br></pre></td></tr></table></figure>
+<p>浏览器访问 IP 地址是 LNMP 安装成功页面，建议删除或改名（比如：XXX）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -rf index.html </span><br><span class="line">或者</span><br><span class="line">mv index.html XXX.html</span><br></pre></td></tr></table></figure>
+<h3 id="2-Gzip-加速（建议）"><a href="#2-Gzip-加速（建议）" class="headerlink" title="2. Gzip 加速（建议）"></a>2. Gzip 加速（建议）</h3><blockquote>
+<p>开GZIP有什么好处？</p>
+<p>答：Gzip开启以后会将输出到用户浏览器的数据进行压缩的处理，这样就会减小通过网络传输的数据量，提高浏览的速度。</p>
+</blockquote>
+<p>你需要找到你所使用主题的 index.php，在头部加上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ob_start(&apos;ob_gzhandler&apos;);</span><br></pre></td></tr></table></figure>
+<p>这里使用 FileZilla 找到该文件，下载，修改，然后上传即可，非常方便。</p>
+<p>路径是：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">你的主页路径/usr/themes/在使用的主题名/index.php</span><br></pre></td></tr></table></figure>
+<p>在这个位置添加：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 这是 Typecho 0.9 系统的一套默认皮肤</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@package</span> Typecho Replica Theme </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Typecho Team</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> 1.2</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@link</span> http://typecho.org</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">ob_start(<span class="string">'ob_gzhandler'</span>); <span class="comment">// 添加的位置</span></span><br></pre></td></tr></table></figure>
+<p><a href="http://tool.chinaz.com/gzips/" target="_blank" rel="noopener">站长工具</a>检测</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/03/Spark/1-RDD 的编程 API /" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/03/Zookeeper/2-zookeeper架构/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-搭建-LNMP-环境"><span class="nav-number">1.</span> <span class="nav-text">1.搭建 LNMP 环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-什么是-LNMP"><span class="nav-number">1.1.</span> <span class="nav-text">1. 什么是 LNMP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-搭建-NMP"><span class="nav-number">1.2.</span> <span class="nav-text">2. 搭建 NMP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-添加域名"><span class="nav-number">2.</span> <span class="nav-text">2.添加域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-安装-Typecho"><span class="nav-number">3.</span> <span class="nav-text">3. 安装 Typecho</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-安装SSL证书"><span class="nav-number">4.</span> <span class="nav-text">4.安装SSL证书</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-一键生成证书"><span class="nav-number">4.1.</span> <span class="nav-text">1.一键生成证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-本文是生成通配符证书比较麻烦"><span class="nav-number">4.2.</span> <span class="nav-text">2.本文是生成通配符证书比较麻烦</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-强制https访问"><span class="nav-number">4.3.</span> <span class="nav-text">3.强制https访问</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-安全-amp-优化-amp-遇到的问题"><span class="nav-number">5.</span> <span class="nav-text">5. 安全 &amp; 优化 &amp; 遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安全考虑（强烈建议）"><span class="nav-number">5.1.</span> <span class="nav-text">1. 安全考虑（强烈建议）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Gzip-加速（建议）"><span class="nav-number">5.2.</span> <span class="nav-text">2. Gzip 加速（建议）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
