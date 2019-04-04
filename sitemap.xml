@@ -3,22 +3,22 @@
 
 
     <sitemap>
-        <loc>https://wuyg.top/post-sitemap.xml</loc>
+        <loc>http://yoursite.com/post-sitemap.xml</loc>
         <lastmod>2019-04-04T11:19:39.421Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>https://wuyg.top/page-sitemap.xml</loc>
+        <loc>http://yoursite.com/page-sitemap.xml</loc>
         <lastmod>2019-04-04T11:19:39.402Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>https://wuyg.top/category-sitemap.xml</loc>
+        <loc>http://yoursite.com/category-sitemap.xml</loc>
         <lastmod>2019-04-04T11:19:39.408Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>https://wuyg.top/tag-sitemap.xml</loc>
+        <loc>http://yoursite.com/tag-sitemap.xml</loc>
         <lastmod>2019-04-04T11:19:39.408Z</lastmod>
     </sitemap>
 
