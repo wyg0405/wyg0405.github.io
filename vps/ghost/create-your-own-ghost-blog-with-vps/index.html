@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="zookeeper,">
+  <meta name="keywords" content="vps,ghost,">
 
 
 
@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="奇数个节点  1.上传安装包并解压12[hadoop@hadoop1 ~]$ tar -zxvf zookeeper-3.4.10.tar.gz [hadoop@hadoop1 ~]$ mv zookeeper-3.4.10 zookeeper 2.修改配置文件1.修改zoo.cfg12345[hadoop@hadoop1 ~]$ cd zookeeper/conf[hadoop@hadoop1">
-<meta name="keywords" content="zookeeper">
+<meta name="description" content="1.环境这里采用Ghost-cli+Mysql+Nginx的方式 我的VPS是在Vultr上购买的5美元每月服务  centos 7 mysql 5.7 node.js v6.14.4 nginx ghost-cli  2.mysql安装配置安装mysql 1234rpm -ivh http://repo.mysql.com/mysql-community-release-el7-5.noarch">
+<meta name="keywords" content="vps,ghost">
 <meta property="og:type" content="article">
-<meta property="og:title" content="zookeeper安装">
-<meta property="og:url" content="https://wuyg.top/zookeeper/zookeeper安装/index.html">
+<meta property="og:title" content="用VPS建立自己的Ghost博客">
+<meta property="og:url" content="https://wuyg.top/vps/ghost/create-your-own-ghost-blog-with-vps/index.html">
 <meta property="og:site_name" content="柏舟">
-<meta property="og:description" content="奇数个节点  1.上传安装包并解压12[hadoop@hadoop1 ~]$ tar -zxvf zookeeper-3.4.10.tar.gz [hadoop@hadoop1 ~]$ mv zookeeper-3.4.10 zookeeper 2.修改配置文件1.修改zoo.cfg12345[hadoop@hadoop1 ~]$ cd zookeeper/conf[hadoop@hadoop1">
+<meta property="og:description" content="1.环境这里采用Ghost-cli+Mysql+Nginx的方式 我的VPS是在Vultr上购买的5美元每月服务  centos 7 mysql 5.7 node.js v6.14.4 nginx ghost-cli  2.mysql安装配置安装mysql 1234rpm -ivh http://repo.mysql.com/mysql-community-release-el7-5.noarch">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-04T05:55:35.522Z">
+<meta property="og:image" content="https://wuyg.top/images/2019/04/03/9928bfb0-5614-11e9-bf34-655e103b336d.png">
+<meta property="og:updated_time" content="2019-04-04T11:19:39.410Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zookeeper安装">
-<meta name="twitter:description" content="奇数个节点  1.上传安装包并解压12[hadoop@hadoop1 ~]$ tar -zxvf zookeeper-3.4.10.tar.gz [hadoop@hadoop1 ~]$ mv zookeeper-3.4.10 zookeeper 2.修改配置文件1.修改zoo.cfg12345[hadoop@hadoop1 ~]$ cd zookeeper/conf[hadoop@hadoop1">
+<meta name="twitter:title" content="用VPS建立自己的Ghost博客">
+<meta name="twitter:description" content="1.环境这里采用Ghost-cli+Mysql+Nginx的方式 我的VPS是在Vultr上购买的5美元每月服务  centos 7 mysql 5.7 node.js v6.14.4 nginx ghost-cli  2.mysql安装配置安装mysql 1234rpm -ivh http://repo.mysql.com/mysql-community-release-el7-5.noarch">
+<meta name="twitter:image" content="https://wuyg.top/images/2019/04/03/9928bfb0-5614-11e9-bf34-655e103b336d.png">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://wuyg.top/zookeeper/zookeeper安装/">
+  <link rel="canonical" href="https://wuyg.top/vps/ghost/create-your-own-ghost-blog-with-vps/">
 
 
 
 
 
-  <title>zookeeper安装 | 柏舟</title>
+  <title>用VPS建立自己的Ghost博客 | 柏舟</title>
   
 
 
@@ -311,7 +313,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wuyg.top/zookeeper/zookeeper安装/">
+    <link itemprop="mainEntityOfPage" href="https://wuyg.top/vps/ghost/create-your-own-ghost-blog-with-vps/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="柏舟">
@@ -328,7 +330,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">zookeeper安装</h1>
+          <h1 class="post-title" itemprop="name headline">用VPS建立自己的Ghost博客</h1>
         
 
         <div class="post-meta">
@@ -340,7 +342,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-03T22:29:37+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-03T21:24:02+08:00">
                 2019-04-03
               </time>
             
@@ -363,8 +365,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/zookeeper/" itemprop="url" rel="index">
-                    <span itemprop="name">zookeeper</span>
+                  <a href="/categories/vps/" itemprop="url" rel="index">
+                    <span itemprop="name">vps</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vps/ghost/" itemprop="url" rel="index">
+                    <span itemprop="name">ghost</span>
                   </a>
                 </span>
 
@@ -375,6 +388,16 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/vps/ghost/create-your-own-ghost-blog-with-vps/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="vps/ghost/create-your-own-ghost-blog-with-vps/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -394,7 +417,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  
+                  643
                 </span>
               
 
@@ -410,7 +433,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  
+                  3
                 </span>
               
             </div>
@@ -431,34 +454,48 @@
       
 
       
-        <blockquote>
-<p>奇数个节点</p>
-</blockquote>
-<h2 id="1-上传安装包并解压"><a href="#1-上传安装包并解压" class="headerlink" title="1.上传安装包并解压"></a>1.上传安装包并解压</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop1 ~]$ tar -zxvf zookeeper-3.4.10.tar.gz </span><br><span class="line">[hadoop@hadoop1 ~]$ mv zookeeper-3.4.10 zookeeper</span><br></pre></td></tr></table></figure>
-<h2 id="2-修改配置文件"><a href="#2-修改配置文件" class="headerlink" title="2.修改配置文件"></a>2.修改配置文件</h2><h3 id="1-修改zoo-cfg"><a href="#1-修改zoo-cfg" class="headerlink" title="1.修改zoo.cfg"></a>1.修改zoo.cfg</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop1 ~]$ <span class="built_in">cd</span> zookeeper/conf</span><br><span class="line">[hadoop@hadoop1 conf]$ ls</span><br><span class="line">configuration.xsl  log4j.properties  zoo_sample.cfg</span><br><span class="line">[hadoop@hadoop1 conf]$ cp zoo_sample.cfg zoo.cfg</span><br><span class="line">[hadoop@hadoop1 conf]$ vim zoo.cfg</span><br></pre></td></tr></table></figure>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The number of milliseconds of each tick</span></span><br><span class="line">tickTime=2000</span><br><span class="line"><span class="comment"># The number of ticks that the initial </span></span><br><span class="line"><span class="comment"># synchronization phase can take</span></span><br><span class="line">initLimit=10</span><br><span class="line"><span class="comment"># The number of ticks that can pass between </span></span><br><span class="line"><span class="comment"># sending a request and getting an acknowledgement</span></span><br><span class="line">syncLimit=5</span><br><span class="line"><span class="comment"># the directory where the snapshot is stored.</span></span><br><span class="line"><span class="comment"># do not use /tmp for storage, /tmp here is just </span></span><br><span class="line"><span class="comment"># example sakes.</span></span><br><span class="line">dataDir=/home/hadoop/data/zookeeper</span><br><span class="line"><span class="comment"># the port at which the clients will connect</span></span><br><span class="line">clientPort=2181</span><br><span class="line"><span class="comment"># the maximum number of client connections.</span></span><br><span class="line"><span class="comment"># increase this if you need to handle more clients</span></span><br><span class="line"><span class="comment">#maxClientCnxns=60</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Be sure to read the maintenance section of the </span></span><br><span class="line"><span class="comment"># administrator guide before turning on autopurge.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># The number of snapshots to retain in dataDir</span></span><br><span class="line"><span class="comment">#autopurge.snapRetainCount=3</span></span><br><span class="line"><span class="comment"># Purge task interval in hours</span></span><br><span class="line"><span class="comment"># Set to "0" to disable auto purge feature</span></span><br><span class="line"><span class="comment">#autopurge.purgeInterval=1</span></span><br><span class="line">server.1=hadoop1:2888:3888</span><br><span class="line">server.2=hadoop2:2888:3888</span><br><span class="line">server.3=hadoop3:2888:3888</span><br></pre></td></tr></table></figure>
-<p>只需修改快照路径</p>
+        <h3 id="1-环境"><a href="#1-环境" class="headerlink" title="1.环境"></a>1.环境</h3><p><img src="/images/2019/04/03/9928bfb0-5614-11e9-bf34-655e103b336d.png" alt="green.png"><br>这里采用Ghost-cli+Mysql+Nginx的方式</p>
+<p>我的VPS是在Vultr上购买的5美元每月服务</p>
+<ul>
+<li>centos 7</li>
+<li>mysql 5.7</li>
+<li>node.js v6.14.4</li>
+<li>nginx</li>
+<li>ghost-cli</li>
+</ul>
+<h3 id="2-mysql安装配置"><a href="#2-mysql安装配置" class="headerlink" title="2.mysql安装配置"></a>2.mysql安装配置</h3><p>安装mysql</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm </span><br><span class="line">yum -y install mysql-server mysql</span><br><span class="line">systemctl start mysqld.service</span><br><span class="line">systemctl <span class="built_in">enable</span> mysqld <span class="comment">#设置开机启动</span></span><br></pre></td></tr></table></figure>
+<p>配置mysql</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">'temporary password'</span> /var/<span class="built_in">log</span>/mysqld.log <span class="comment">#获取安装时的初始密码</span></span><br><span class="line">mysql -r -root -p  <span class="comment">#登陆mysql</span></span><br><span class="line">mysql&gt; ALTER USER <span class="string">'root'</span>@<span class="string">'localhost'</span> IDENTIFIED BY <span class="string">'MyNewPass4!'</span>; <span class="comment">#注意密码需有一定复杂度，否则会提示</span></span><br><span class="line">mysql&gt; create database ghost; <span class="comment">#建立ghost数据库</span></span><br><span class="line">mysql&gt; create user <span class="string">'ghost'</span> IDENTIFIED BY <span class="string">'password'</span>;<span class="comment">#新建ghost用户</span></span><br><span class="line">mysql&gt; grant all on ghost.* to <span class="string">'ghost'</span>@localhost identified by <span class="string">'ghost'</span>;<span class="comment">#给ghost用户赋权</span></span><br><span class="line">mysql&gt; flush privileges; <span class="comment">#刷新权限</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>dataDir=/home/hadoop/data/zookeeper</p>
+<p>注意：mysql 5.7 默认安装了密码安全检查插件（validate_password），默认密码检查策略要求密码必须包含：大小写字母、数字和特殊符号，并且长度不能少于8位。否则会提示 ERROR 1819 (HY000): Your password does not satisfy the current policy requirements 错误。查看 <a href="https://link.jianshu.com?t=https%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.7%2Fen%2Fvalidate-password-options-variables.html%23sysvar_validate_password_policy" target="_blank" rel="noopener">MySQL官网密码详细策略</a></p>
 </blockquote>
-<p>添加集群信息</p>
-<blockquote>
-<p>server.1=hadoop1:2888:3888</p>
-<p>server.2=hadoop2:2888:3888</p>
-<p>server.3=hadoop3:2888:3888</p>
-</blockquote>
-<p><code>说明</code></p>
-<blockquote>
-<ol>
-<li>server.id必须和dataDir目录下的myid内容一致，且id范围在1——255之间</li>
-<li>2888表示通信端口，3888表示选主端口</li>
-</ol>
-</blockquote>
-<h3 id="2-添加每个节点的id"><a href="#2-添加每个节点的id" class="headerlink" title="2.添加每个节点的id"></a>2.添加每个节点的id</h3><p>在<code>/home/hadoop/data/zookeeper</code>下创建myid文件，并写入对应id</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop1 data]$ mkdir zookeeper</span><br><span class="line">[hadoop@hadoop1 data]$ vi myid</span><br></pre></td></tr></table></figure>
-<h3 id="3-修改环境变量"><a href="#3-修改环境变量" class="headerlink" title="3.修改环境变量"></a>3.修改环境变量</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###切换到root</span></span><br><span class="line">[root@hadoop1 ~]<span class="comment"># vim /etc/profile</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Java</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/jdk8</span><br><span class="line"><span class="built_in">export</span> HADOOP_HOME=/home/hadoop/hadoop</span><br><span class="line"><span class="built_in">export</span> HIVE_HOME=/home/hadoop/hive</span><br><span class="line"><span class="built_in">export</span> ZOOKEEPER_HOME=/home/hadoop/zookeeper</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$HADOOP_HOME</span>/bin:<span class="variable">$HADOOP_HOME</span>/sbin:<span class="variable">$HIVE_HOME</span>/bin:<span class="variable">$ZOOKEEPER_HOME</span>/bin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@hadoop1 ~]<span class="comment"># source /etc/profile</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-启动"><a href="#3-启动" class="headerlink" title="3.启动"></a>3.启动</h2><p>每个节点都要单独启动</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop1 ~]$ <span class="built_in">cd</span> zookeeper/bin/</span><br><span class="line">[hadoop@hadoop1 bin]$ zkServer.sh start</span><br><span class="line">[hadoop@hadoop1 bin]$ jps</span><br><span class="line">3717 Jps</span><br><span class="line">5285 DataNode</span><br><span class="line">5142 NameNode</span><br><span class="line">3688 QuorumPeerMain</span><br><span class="line">5994 NodeManager</span><br><span class="line"></span><br><span class="line"><span class="comment">###检查状态</span></span><br><span class="line">[hadoop@hadoop1 bin]$ zkServer.sh status</span><br><span class="line">ZooKeeper JMX enabled by default</span><br><span class="line">Using config: /home/hadoop/zookeeper/bin/../conf/zoo.cfg</span><br><span class="line">Mode: follower</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop2 bin]$ zkServer.sh status</span><br><span class="line">ZooKeeper JMX enabled by default</span><br><span class="line">Using config: /home/hadoop/zookeeper/bin/../conf/zoo.cfg</span><br><span class="line">Mode: followe</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop3 bin]$ zkServer.sh status</span><br><span class="line">ZooKeeper JMX enabled by default</span><br><span class="line">Using config: /home/hadoop/zookeeper/bin/../conf/zoo.cfg</span><br><span class="line">Mode: leader</span><br></pre></td></tr></table></figure>
+<h3 id="3-安装node-js"><a href="#3-安装node-js" class="headerlink" title="3.安装node.js"></a>3.安装node.js</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -sL https://rpm.nodesource.com/setup_6.x | bash -  </span><br><span class="line">yum install nodejs</span><br></pre></td></tr></table></figure>
+<p>验证</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+<h3 id="4-安装ghost-cli"><a href="#4-安装ghost-cli" class="headerlink" title="4.安装ghost-cli"></a>4.安装ghost-cli</h3><p>安装ghost-cli</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g ghost-cli</span><br></pre></td></tr></table></figure>
+<p>国内配置加速，国外服务器不需要</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<h3 id="5-配置ghost用户"><a href="#5-配置ghost用户" class="headerlink" title="5.配置ghost用户"></a>5.配置ghost用户</h3><p>新建ghost用户</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adduser ghost</span><br><span class="line">mkdir /var/www/ghost</span><br><span class="line">chown ghost /var/www/gho</span><br></pre></td></tr></table></figure>
+<p>配置sudo权限</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">groupadd sudo</span><br><span class="line">chown -R ghost:sudo /home/ghost/</span><br><span class="line">chmod 775 /home/ghost/</span><br><span class="line">usermod -aG sudo ghost</span><br></pre></td></tr></table></figure>
+<h3 id="6-切换ghost用户并安装"><a href="#6-切换ghost用户并安装" class="headerlink" title="6.切换ghost用户并安装"></a>6.切换ghost用户并安装</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su ghost</span><br><span class="line"><span class="built_in">cd</span> /var/www/ghost</span><br><span class="line">ghost install <span class="built_in">local</span> --db mysql</span><br></pre></td></tr></table></figure>
+<p>根据提示输入相关信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">? Enter your MySQL hostname: localhost</span><br><span class="line">? Enter your MySQL username: ghost</span><br><span class="line">? Enter your MySQL password: [hidden]</span><br><span class="line">? Enter your Ghost database name: ghost</span><br><span class="line">✔ Configuring Ghost</span><br><span class="line">✔ Setting up instance</span><br><span class="line">✔ Running database migrations</span><br><span class="line">ℹ Ensuring user is not logged in as ghost user [skipped]</span><br><span class="line">ℹ Checking if logged in user is directory owner [skipped]</span><br><span class="line">✔ Checking current folder permissions</span><br><span class="line">✔ Validating config</span><br><span class="line">✔ Checking memory availability</span><br><span class="line">✔ Starting Ghost</span><br><span class="line">You can access your blog at http://localhost:2368/</span><br><span class="line"></span><br><span class="line">Ghost uses direct mail by default</span><br><span class="line">To set up an alternative email method read our docs at https://docs.ghost.org/docs/mail-config</span><br></pre></td></tr></table></figure>
+<h3 id="7-修改配置文件"><a href="#7-修改配置文件" class="headerlink" title="7.修改配置文件"></a>7.修改配置文件</h3><p>查看ghost</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ghost ls</span><br></pre></td></tr></table></figure>
+<p>可以看到ghost现在是运行在开发模式development下，下面修改为生产模式</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ghost stop</span><br><span class="line">cp config.development.json config.production.json</span><br></pre></td></tr></table></figure>
+<p>在配置文件里面修改url，改成你自己的域名即可</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi config.production.json</span><br><span class="line"></span><br><span class="line"><span class="string">"url"</span>: <span class="string">"http://www.wuyg.top/"</span> <span class="comment">#此处换为你的域名</span></span><br><span class="line"></span><br><span class="line">ghost start即可</span><br></pre></td></tr></table></figure>
+<h3 id="8-nginx-反向代理"><a href="#8-nginx-反向代理" class="headerlink" title="8.nginx 反向代理"></a>8.nginx 反向代理</h3><p>安装nginx</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y nginx</span><br></pre></td></tr></table></figure>
+<p>修改配置</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/nginx/conf.d/ghost.conf</span><br><span class="line"></span><br><span class="line">server &#123;  </span><br><span class="line">listen 80;</span><br><span class="line">server_name www.wuyg.top; <span class="comment">#此处换为你的域名，多个用空格隔开</span></span><br><span class="line"></span><br><span class="line">location / &#123;</span><br><span class="line">    proxy_set_header   X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">    proxy_set_header   Host      <span class="variable">$http_host</span>;</span><br><span class="line">    proxy_pass         http://127.0.0.1:2368;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>启动nginx</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx.service</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span> nginx.service <span class="comment">#开机启动</span></span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -475,7 +512,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/zookeeper/" rel="tag"><i class="fa fa-tag"></i> zookeeper</a>
+            <a href="/tags/vps/" rel="tag"><i class="fa fa-tag"></i> vps</a>
+          
+            <a href="/tags/ghost/" rel="tag"><i class="fa fa-tag"></i> ghost</a>
           
         </div>
       
@@ -488,15 +527,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/mysql/mysql5.6安装/" rel="next" title="linux CentOS6.5 yum安装mysql 5.6">
-                <i class="fa fa-chevron-left"></i> linux CentOS6.5 yum安装mysql 5.6
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/git/git-instructions/" rel="prev" title=" Git使用说明">
+                 Git使用说明 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -524,6 +563,16 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
 
   
 
@@ -644,7 +693,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-上传安装包并解压"><span class="nav-number">1.</span> <span class="nav-text">1.上传安装包并解压</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-修改配置文件"><span class="nav-number">2.</span> <span class="nav-text">2.修改配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-修改zoo-cfg"><span class="nav-number">2.1.</span> <span class="nav-text">1.修改zoo.cfg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-添加每个节点的id"><span class="nav-number">2.2.</span> <span class="nav-text">2.添加每个节点的id</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-修改环境变量"><span class="nav-number">2.3.</span> <span class="nav-text">3.修改环境变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-启动"><span class="nav-number">3.</span> <span class="nav-text">3.启动</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-环境"><span class="nav-number">1.</span> <span class="nav-text">1.环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-mysql安装配置"><span class="nav-number">2.</span> <span class="nav-text">2.mysql安装配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安装node-js"><span class="nav-number">3.</span> <span class="nav-text">3.安装node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-安装ghost-cli"><span class="nav-number">4.</span> <span class="nav-text">4.安装ghost-cli</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-配置ghost用户"><span class="nav-number">5.</span> <span class="nav-text">5.配置ghost用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-切换ghost用户并安装"><span class="nav-number">6.</span> <span class="nav-text">6.切换ghost用户并安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-修改配置文件"><span class="nav-number">7.</span> <span class="nav-text">7.修改配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-nginx-反向代理"><span class="nav-number">8.</span> <span class="nav-text">8.nginx 反向代理</span></a></li></ol></div>
             
 
           </div>
@@ -678,7 +727,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count"></span>
+    <span title="Site words total count">12.2k</span>
   
 </div>
 
@@ -740,8 +789,6 @@
   
 
 
-  
-
 
 
 
@@ -782,11 +829,6 @@
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
-  
-
 
   
 
@@ -825,6 +867,26 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://wuyg.top/vps/ghost/create-your-own-ghost-blog-with-vps/';
+          this.page.identifier = 'vps/ghost/create-your-own-ghost-blog-with-vps/';
+          this.page.title = '用VPS建立自己的Ghost博客';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -860,7 +922,7 @@
     var isfetched = false;
     var isXml = true;
     // Search DB path;
-    var search_path = "";
+    var search_path = "search.xml";
     if (search_path.length === 0) {
       search_path = "search.xml";
     } else if (/json$/i.test(search_path)) {
