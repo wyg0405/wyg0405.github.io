@@ -44,7 +44,14 @@
 
     <url>
         <loc>https://wyg0405.github.io/categories/hadoop/</loc>
-        <lastmod>2019-04-06T13:40:35.787Z</lastmod>
+        <lastmod>2019-04-10T14:18:42.112Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://wyg0405.github.io/categories/spark/</loc>
+        <lastmod>2019-04-10T14:51:15.553Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

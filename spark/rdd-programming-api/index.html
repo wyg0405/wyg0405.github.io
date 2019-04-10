@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Tag: hadoop | 柏舟</title>
+  <title>RDD的编程API | 柏舟</title>
   
   
   <meta name="description" content="百川东到海 何时复西归">
@@ -178,22 +178,10 @@
     <div class='body-wrapper'>
       <div class="l_main">
   
-    
-      
-  <section class="post-list">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
+
   
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class="meta">
@@ -202,11 +190,13 @@
     <div class="meta" id="header-meta">
       
         
-  <h2 class="title">
-    <a href="/hadoop/hadoop-distributed-installation/">
-      Hadoop分布式安装
-    </a>
-  </h2>
+  
+    <h1 class="title">
+      <a href="/spark/rdd-programming-api/">
+        RDD的编程API
+      </a>
+    </h1>
+  
 
 
       
@@ -232,7 +222,7 @@
             <div class="new-meta-item date">
   <a class="notlink">
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-04-05</p>
+    <p>2019-04-10</p>
   </a>
 </div>
 
@@ -242,9 +232,9 @@
             
   
   <div class="new-meta-item category">
-    <a href="/categories/hadoop/" rel="nofollow">
+    <a href="/categories/spark/" rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>hadoop</p>
+      <p>spark</p>
     </a>
   </div>
 
@@ -253,6 +243,19 @@
         
           
             
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class="notlink">
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
 
           
         
@@ -269,44 +272,249 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      搭建hadoop分布式环境
-      
-        <div class="readmore">
-          <a href="/hadoop/hadoop-distributed-installation/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            Read More
-          </a>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <p><a href="http://spark.apache.org/docs/latest/rdd-programming-guide.html#transformatio" target="_blank" rel="noopener">官网</a></p>
+<a id="more"></a>
+<h2 id="Transformation"><a href="#Transformation" class="headerlink" title="Transformation"></a>Transformation</h2><table>
+<thead>
+<tr>
+<th>Transformation</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>map</strong>(<em>func</em>)</td>
+<td>Return a new distributed dataset formed by passing each element of the source through a function <em>func</em>.</td>
+</tr>
+<tr>
+<td><strong>filter</strong>(<em>func</em>)</td>
+<td>Return a new dataset formed by selecting those elements of the source on which <em>func</em>returns true.</td>
+</tr>
+<tr>
+<td><strong>flatMap</strong>(<em>func</em>)</td>
+<td>Similar to map, but each input item can be mapped to 0 or more output items (so <em>func</em> should return a Seq rather than a single item).</td>
+</tr>
+<tr>
+<td><strong>mapPartitions</strong>(<em>func</em>)</td>
+<td>Similar to map, but runs separately on each partition (block) of the RDD, so <em>func</em> must be of type Iterator<t> =&gt; Iterator<u> when running on an RDD of type T.</u></t></td>
+</tr>
+<tr>
+<td><strong>mapPartitionsWithIndex</strong>(<em>func</em>)</td>
+<td>Similar to mapPartitions, but also provides <em>func</em> with an integer value representing the index of the partition, so <em>func</em> must be of type (Int, Iterator<t>) =&gt; Iterator<u> when running on an RDD of type T.</u></t></td>
+</tr>
+<tr>
+<td><strong>sample</strong>(<em>withReplacement</em>, <em>fraction</em>, <em>seed</em>)</td>
+<td>Sample a fraction <em>fraction</em> of the data, with or without replacement, using a given random number generator seed.</td>
+</tr>
+<tr>
+<td><strong>union</strong>(<em>otherDataset</em>)</td>
+<td>Return a new dataset that contains the union of the elements in the source dataset and the argument.</td>
+</tr>
+<tr>
+<td><strong>intersection</strong>(<em>otherDataset</em>)</td>
+<td>Return a new RDD that contains the intersection of elements in the source dataset and the argument.</td>
+</tr>
+<tr>
+<td><strong>distinct</strong>([<em>numPartitions</em>]))</td>
+<td>Return a new dataset that contains the distinct elements of the source dataset.</td>
+</tr>
+<tr>
+<td><strong>groupByKey</strong>([<em>numPartitions</em>])</td>
+<td>When called on a dataset of (K, V) pairs, returns a dataset of (K, Iterable<v>) pairs.  <strong>Note:</strong> If you are grouping in order to perform an aggregation (such as a sum or average) over each key, using <code>reduceByKey</code> or <code>aggregateByKey</code> will yield much better performance.  <strong>Note:</strong> By default, the level of parallelism in the output depends on the number of partitions of the parent RDD. You can pass an optional <code>numPartitions</code> argument to set a different number of tasks.</v></td>
+</tr>
+<tr>
+<td><strong>reduceByKey</strong>(<em>func</em>, [<em>numPartitions</em>])</td>
+<td>When called on a dataset of (K, V) pairs, returns a dataset of (K, V) pairs where the values for each key are aggregated using the given reduce function <em>func</em>, which must be of type (V,V) =&gt; V. Like in <code>groupByKey</code>, the number of reduce tasks is configurable through an optional second argument.</td>
+</tr>
+<tr>
+<td><strong>aggregateByKey</strong>(<em>zeroValue</em>)(<em>seqOp</em>, <em>combOp</em>, [<em>numPartitions</em>])</td>
+<td>When called on a dataset of (K, V) pairs, returns a dataset of (K, U) pairs where the values for each key are aggregated using the given combine functions and a neutral “zero” value. Allows an aggregated value type that is different than the input value type, while avoiding unnecessary allocations. Like in <code>groupByKey</code>, the number of reduce tasks is configurable through an optional second argument.</td>
+</tr>
+<tr>
+<td><strong>sortByKey</strong>([<em>ascending</em>], [<em>numPartitions</em>])</td>
+<td>When called on a dataset of (K, V) pairs where K implements Ordered, returns a dataset of (K, V) pairs sorted by keys in ascending or descending order, as specified in the boolean <code>ascending</code> argument.</td>
+</tr>
+<tr>
+<td><strong>join</strong>(<em>otherDataset</em>, [<em>numPartitions</em>])</td>
+<td>When called on datasets of type (K, V) and (K, W), returns a dataset of (K, (V, W)) pairs with all pairs of elements for each key. Outer joins are supported through <code>leftOuterJoin</code>, <code>rightOuterJoin</code>, and <code>fullOuterJoin</code>.</td>
+</tr>
+<tr>
+<td><strong>cogroup</strong>(<em>otherDataset</em>, [<em>numPartitions</em>])</td>
+<td>When called on datasets of type (K, V) and (K, W), returns a dataset of (K, (Iterable<v>, Iterable<w>)) tuples. This operation is also called <code>groupWith</code>.</w></v></td>
+</tr>
+<tr>
+<td><strong>cartesian</strong>(<em>otherDataset</em>)</td>
+<td>When called on datasets of types T and U, returns a dataset of (T, U) pairs (all pairs of elements).</td>
+</tr>
+<tr>
+<td><strong>pipe</strong>(<em>command</em>, <em>[envVars]</em>)</td>
+<td>Pipe each partition of the RDD through a shell command, e.g. a Perl or bash script. RDD elements are written to the process’s stdin and lines output to its stdout are returned as an RDD of strings.</td>
+</tr>
+<tr>
+<td><strong>coalesce</strong>(<em>numPartitions</em>)</td>
+<td>Decrease the number of partitions in the RDD to numPartitions. Useful for running operations more efficiently after filtering down a large dataset.</td>
+</tr>
+<tr>
+<td><strong>repartition</strong>(<em>numPartitions</em>)</td>
+<td>Reshuffle the data in the RDD randomly to create either more or fewer partitions and balance it across them. This always shuffles all data over the network.</td>
+</tr>
+<tr>
+<td><strong>repartitionAndSortWithinPartitions</strong>(<em>partitioner</em>)</td>
+<td>Repartition the RDD according to the given partitioner and, within each resulting partition, sort records by their keys. This is more efficient than calling <code>repartition</code> and then sorting within each partition because it can push the sorting down into the shuffle machinery.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Actions"><a href="#Actions" class="headerlink" title="Actions"></a>Actions</h2><p>The following table lists some of the common actions supported by Spark. Refer to the RDD API doc (<a href="https://spark.apache.org/docs/2.3.3/api/scala/index.html#org.apache.spark.rdd.RDD" target="_blank" rel="noopener">Scala</a>, <a href="https://spark.apache.org/docs/2.3.3/api/java/index.html?org/apache/spark/api/java/JavaRDD.html" target="_blank" rel="noopener">Java</a>, <a href="https://spark.apache.org/docs/2.3.3/api/python/pyspark.html#pyspark.RDD" target="_blank" rel="noopener">Python</a>, <a href="https://spark.apache.org/docs/2.3.3/api/R/index.html" target="_blank" rel="noopener">R</a>)</p>
+<p>and pair RDD functions doc (<a href="https://spark.apache.org/docs/2.3.3/api/scala/index.html#org.apache.spark.rdd.PairRDDFunctions" target="_blank" rel="noopener">Scala</a>, <a href="https://spark.apache.org/docs/2.3.3/api/java/index.html?org/apache/spark/api/java/JavaPairRDD.html" target="_blank" rel="noopener">Java</a>) for details.</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>reduce</strong>(<em>func</em>)</td>
+<td>Aggregate the elements of the dataset using a function <em>func</em> (which takes two arguments and returns one). The function should be commutative and associative so that it can be computed correctly in parallel.</td>
+</tr>
+<tr>
+<td><strong>collect</strong>()</td>
+<td>Return all the elements of the dataset as an array at the driver program. This is usually useful after a filter or other operation that returns a sufficiently small subset of the data.</td>
+</tr>
+<tr>
+<td><strong>count</strong>()</td>
+<td>Return the number of elements in the dataset.</td>
+</tr>
+<tr>
+<td><strong>first</strong>()</td>
+<td>Return the first element of the dataset (similar to take(1)).</td>
+</tr>
+<tr>
+<td><strong>take</strong>(<em>n</em>)</td>
+<td>Return an array with the first <em>n</em> elements of the dataset.</td>
+</tr>
+<tr>
+<td><strong>takeSample</strong>(<em>withReplacement</em>, <em>num</em>, [<em>seed</em>])</td>
+<td>Return an array with a random sample of <em>num</em> elements of the dataset, with or without replacement, optionally pre-specifying a random number generator seed.</td>
+</tr>
+<tr>
+<td><strong>takeOrdered</strong>(<em>n</em>, <em>[ordering]</em>)</td>
+<td>Return the first <em>n</em> elements of the RDD using either their natural order or a custom comparator.</td>
+</tr>
+<tr>
+<td><strong>saveAsTextFile</strong>(<em>path</em>)</td>
+<td>Write the elements of the dataset as a text file (or set of text files) in a given directory in the local filesystem, HDFS or any other Hadoop-supported file system. Spark will call toString on each element to convert it to a line of text in the file.</td>
+</tr>
+<tr>
+<td><strong>saveAsSequenceFile</strong>(<em>path</em>)  (Java and Scala)</td>
+<td>Write the elements of the dataset as a Hadoop SequenceFile in a given path in the local filesystem, HDFS or any other Hadoop-supported file system. This is available on RDDs of key-value pairs that implement Hadoop’s Writable interface. In Scala, it is also available on types that are implicitly convertible to Writable (Spark includes conversions for basic types like Int, Double, String, etc).</td>
+</tr>
+<tr>
+<td><strong>saveAsObjectFile</strong>(<em>path</em>)  (Java and Scala)</td>
+<td>Write the elements of the dataset in a simple format using Java serialization, which can then be loaded using<code>SparkContext.objectFile()</code>.</td>
+</tr>
+<tr>
+<td><strong>countByKey</strong>()</td>
+<td>Only available on RDDs of type (K, V). Returns a hashmap of (K, Int) pairs with the count of each key.</td>
+</tr>
+<tr>
+<td><strong>foreach</strong>(<em>func</em>)</td>
+<td>Run a function <em>func</em> on each element of the dataset. This is usually done for side effects such as updating an <a href="https://spark.apache.org/docs/2.3.3/rdd-programming-guide.html#accumulators" target="_blank" rel="noopener">Accumulator</a> or interacting with external storage systems.  <strong>Note</strong>: modifying variables other than Accumulators outside of the <code>foreach()</code> may result in undefined behavior. See <a href="https://spark.apache.org/docs/2.3.3/rdd-programming-guide.html#understanding-closures-a-nameclosureslinka" target="_blank" rel="noopener">Understanding closures </a>for more details.</td>
+</tr>
+</tbody>
+</table>
+<p>The Spark RDD API also exposes asynchronous versions of some actions, like <code>foreachAsync</code> for <code>foreach</code>, which immediately return a <code>FutureAction</code> to the caller instead of blocking on completion of the action. This can be used to manage or wait for the asynchronous execution of the action.</p>
+
         </div>
+        
+          
+
+
+  <section class="meta" id="footer-meta">
+    <hr>
+    <div class="new-meta-box">
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-04-10T22:51:15+08:00">
+  <a class="notlink">
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>last updated at Apr 10, 2019</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/spark/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>spark</p></a></div>
+
+
+        
+      
+        
+          
+
+        
       
     </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/hadoop/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>hadoop</a>
-        
-      </div>
-    
   </section>
-</article>
 
-          </div>
+
         
-      
-    
-  </section>
+        
+            <div class="prev-next">
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/spark/spark-performance-optimization-guide-advanced/" rel="prev" title="Spark性能优化指南——高级篇">
+                                    
+                                        Spark性能优化指南——高级篇
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/spark/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>spark</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
   
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
 
   
 
 
-    
-  
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'RDD的编程API',
+      tools: true
+    }
+  </script>
+
+
 </div>
 <aside class="l_side">
   
@@ -355,6 +563,20 @@
           
           
             
+  <section class="widget toc-wrapper">
+    
+<header class="pure">
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
+  
+    <div class="wrapper"><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Transformation"><span class="toc-text">Transformation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Actions"><span class="toc-text">Actions</span></a></li></ol>
+    </div>
+  </section>
+
 
           
         
@@ -487,6 +709,18 @@
           
           
             
+  <section class="widget related_posts">
+    
+<header class="pure">
+  <div><i class="fas fa-bookmark fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Related Posts</div>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\spark\spark-performance-optimization-guide-basics\" title="Spark性能优化指南——基础篇" rel="bookmark">Spark性能优化指南——基础篇</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\spark\spark-performance-optimization-guide-advanced\" title="Spark性能优化指南——高级篇" rel="bookmark">Spark性能优化指南——高级篇</a></h3></div></li></ul>
+    </div>
+  </section>
+
 
           
         
