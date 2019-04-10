@@ -2,48 +2,48 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://yoursite.com</loc>
+        <loc>https://wyg0405.github.io</loc>
         <changefreq>daily</changefreq>
         <priority>1</priority>
     </url>
 
     <url>
-        <loc>http://yoursite.com/categories/mysql/</loc>
+        <loc>https://wyg0405.github.io/categories/mysql/</loc>
         <lastmod>2019-04-05T15:37:17.022Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://yoursite.com/categories/zookeeper/</loc>
+        <loc>https://wyg0405.github.io/categories/zookeeper/</loc>
         <lastmod>2019-04-05T15:37:27.246Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://yoursite.com/categories/vps/</loc>
+        <loc>https://wyg0405.github.io/categories/vps/</loc>
         <lastmod>2019-04-05T15:37:35.838Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://yoursite.com/categories/vps/ghost/</loc>
+        <loc>https://wyg0405.github.io/categories/vps/ghost/</loc>
         <lastmod>2019-04-05T15:37:35.838Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://yoursite.com/categories/git/</loc>
+        <loc>https://wyg0405.github.io/categories/git/</loc>
         <lastmod>2019-04-06T13:33:40.581Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://yoursite.com/categories/hadoop/</loc>
+        <loc>https://wyg0405.github.io/categories/hadoop/</loc>
         <lastmod>2019-04-06T13:40:35.787Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
